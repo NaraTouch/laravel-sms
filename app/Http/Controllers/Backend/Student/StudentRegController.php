@@ -18,19 +18,19 @@ use PDF;
 
 class StudentRegController extends Controller
 {
-	public function che(Request $request) 
-	{
-	 
-	}
-
 	public function StudentRegView()
 	{
 		$data['years'] = StudentYear::all();
 		$data['classes'] = StudentClass::all();
 
-		$data['year_id'] = StudentYear::orderBy('id', 'desc')->first()->id;
-		$data['class_id'] = StudentClass::orderBy('id', 'desc')->first()->id;
-		$data['allData'] = AssignStudent::where('year_id', $data['year_id'])->where('class_id', $data['class_id'])->get();
+		$latestYear = StudentYear::orderBy('id', 'desc')->first();
+		$latestClass = StudentClass::orderBy('id', 'desc')->first();
+		$data['allData'] = [];
+		if ($latestYear && $latestClass) {
+			$data['year_id'] = $latestYear->id;
+			$data['class_id'] = $latestClass->id;
+			$data['allData'] = AssignStudent::where('year_id', $data['year_id'])->where('class_id', $data['class_id'])->get();
+		}
 		return view('backend.admin.dashboard.student.student_reg.student_view', $data);
 	}
 
