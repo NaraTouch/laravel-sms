@@ -18,6 +18,11 @@ use PDF;
 
 class StudentRegController extends Controller
 {
+	public function che(Request $request) 
+	{
+	 
+	}
+
 	public function StudentRegView()
 	{
 		$data['years'] = StudentYear::all();
@@ -36,8 +41,39 @@ class StudentRegController extends Controller
 
 		$data['year_id'] = $request->year_id;
 		$data['class_id'] = $request->class_id;
-
-		$data['allData'] = AssignStudent::where('year_id', $request->year_id)->where('class_id', $request->class_id)->get();
+		$data['name'] = $request->name;
+		$data['allData'] = [];
+		if (!is_null($data['year_id']) ||
+			!is_null($data['class_id']) ||
+			!is_null($data['name'])
+		) {
+			$data['allData'] = DB::table('assign_students')
+			->select(
+				'assign_students.id as id',
+				'assign_students.student_id as student_id',
+				'users.id as user_id',
+				'student_years.id as student_year_id',
+				'student_classes.id as student_classe_id',
+				'users.name as student_name',
+				'users.id_no as student_id_no',
+				'users.image as student_image',
+				'student_years.name as student_year_name',
+				'student_classes.name as student_classe_name'
+				)
+			->join('users', 'users.id', '=', 'assign_students.student_id')
+			->join('student_years', 'student_years.id', '=', 'assign_students.year_id')
+			->join('student_classes', 'student_classes.id', '=', 'assign_students.class_id')
+			->when($request->year_id, function ($query) use ($request) {
+				return $query->where('year_id', $request->year_id);
+			})
+			->when($request->class_id, function ($query) use ($request) {
+				return $query->where('class_id', $request->class_id);
+			})
+			->when($request->name, function ($query) use ($data) {
+				return $query->where('users.name', 'like', '%'.$data['name'].'%');
+			})
+			->get();
+		}
 		return view('backend.admin.dashboard.student.student_reg.student_view', $data);
 	}
 

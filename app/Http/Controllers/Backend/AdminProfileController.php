@@ -13,20 +13,20 @@ class AdminProfileController extends Controller
 {
     public function AdminProfileView()
     {
-        // $id = Auth::user()->id;
-        $admin = Admin::find(1);
+        $id = Auth::guard('admin')->user()->id;
+        $admin = Admin::find($id);
         return view("backend.admin.dashboard.profile.admin_profile_view", compact("admin"));
     }
     public function AdminProfileEdit()
     {
-        // $id = Auth::user()->id;
-        $editData = Admin::find(1);
+        $id = Auth::guard('admin')->user()->id;
+        $editData = Admin::find($id);
         return view('backend.admin.dashboard.profile.admin_profile_edit', compact('editData'));
     }
     public function AdminProfileEditStore(Request $request)
     {
-        // $id = Auth::user()->id;
-        $data = Admin::find(1);
+        $id = Auth::guard('admin')->user()->id;
+        $data = Admin::find($id);
         $data->name = $request->name;
         $data->email = $request->email;
         $data->mobile = $request->mobile;

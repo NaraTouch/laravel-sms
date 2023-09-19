@@ -13,12 +13,12 @@
                             <div class="box-body">
                                 <form method="GET" action="{{ route('student.year.class.wise') }}">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <h5>Year <span class="text-danger"> </span></h5>
                                                 <div class="controls">
-                                                    <select name="year_id" required="" class="form-control">
-                                                        <option value="" selected="" disabled="">Select Year
+                                                    <select name="year_id" class="form-control">
+                                                        <option value="" selected="">Select Year
                                                         </option>
                                                         @foreach ($years as $year)
                                                             <option value="{{ $year->id }}"
@@ -29,12 +29,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <h5>Class <span class="text-danger"> </span></h5>
                                                 <div class="controls">
-                                                    <select name="class_id" required="" class="form-control">
-                                                        <option value="" selected="" disabled="">Select Class
+                                                    <select name="class_id" class="form-control">
+                                                        <option value="" selected="">Select Class
                                                         </option>
                                                         @foreach ($classes as $class)
                                                             <option value="{{ $class->id }}"
@@ -45,7 +45,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4" style="padding-top: 25px;">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h5>Name <span class="text-danger"> </span></h5>
+                                                <div class="controls">
+                                                    <input type="text" name="name" class="form-control" value="{{ @$name }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" style="padding-top: 25px;">
                                             <input type="submit" class="btn btn-rounded btn-dark mb-5" name="search"
                                                 value="Search">
                                         </div>
@@ -80,12 +88,12 @@
                                                 @foreach ($allData as $key => $value)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
-                                                        <td> {{ $value['student']['name'] }}</td>
-                                                        <td> {{ $value['student']['id_no'] }}</td>
-                                                        <td> {{ $value['student_year']['name'] }}</td>
-                                                        <td> {{ $value['student_class']['name'] }}</td>
+                                                        <td> {{ $value->student_name }}</td>
+                                                        <td> {{ $value->student_id_no }}</td>
+                                                        <td> {{ $value->student_year_name }}</td>
+                                                        <td> {{ $value->student_classe_name }}</td>
                                                         <td>
-                                                            <img src="{{ !empty($value['student']['image']) ? url('upload/student_images/' . $value['student']['image']) : url('upload/no_image.jpg') }}"
+                                                            <img src="{{ isset($value->student_image) ? url('upload/student_images/'.$value->student_image) : url('upload/no_image.jpg') }}"
                                                                 style="width: 60px; width: 60px;">
                                                         </td>
                                                         <td>
@@ -124,12 +132,12 @@
                                                 @foreach ($allData as $key => $value)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
-                                                        <td> {{ $value['student']['name'] }}</td>
-                                                        <td> {{ $value['student']['id_no'] }}</td>
-                                                        <td> {{ $value['student_year']['name'] }}</td>
-                                                        <td> {{ $value['student_class']['name'] }}</td>
+                                                        <td> {{ $value->student_name }}</td>
+                                                        <td> {{ $value->student_id_no }}</td>
+                                                        <td> {{ $value->student_year_name }}</td>
+                                                        <td> {{ $value->student_classe_name }}</td>
                                                         <td>
-                                                            <img src="{{ !empty($value['student']['image']) ? url('upload/student_images/' . $value['student']['image']) : url('upload/no_image.jpg') }}"
+                                                            <img src="{{ isset($value->student_image) ? url('upload/student_images/'.$value->student_image) : url('upload/no_image.jpg') }}"
                                                                 style="width: 60px; width: 60px;">
                                                         </td>
                                                         <td>

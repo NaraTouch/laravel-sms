@@ -4,16 +4,13 @@
         <div class="navbar-custom-menu r-side">
             <ul class="nav navbar-nav">
                 @php
-                    $user = DB::table('admins')
-                        // ->where('id', Auth::user()->id)
-                        ->where('id', \App\Models\Admin::find(1))
-                        ->first();
+                    $image = Auth::guard('admin')->user()->image;
                 @endphp
                 <!-- User Account-->
                 <li class="dropdown user user-menu">
                     <a href="#" class="waves-effect waves-light rounded dropdown-toggle p-0" data-toggle="dropdown"
                         title="User">
-                        <img src="{{ !empty($user->image) ? url('upload/user_images/' . $user->image) : url('upload/no_image.jpg') }}"
+                        <img src="{{ !empty($image) ? url('upload/user_images/'.$image) : url('upload/no_image.jpg') }}"
                             alt="">
                     </a>
                     <ul class="dropdown-menu animated flipInX">
