@@ -82,11 +82,22 @@ Route::prefix('admin')->group(function () {
     Route::get('login', [AdminController::class, 'AdminLogin'])->name('admin_login');
     Route::post('login', [AdminController::class, 'AdminLoginStore'])->name('admin_login_store');
     Route::get('logout', [AdminController::class, 'AdminLogout'])->name('admin_logout')->middleware('admin');
-    Route::get('register', [AdminController::class, 'AdminRegister'])->name('admin_register');
-    Route::post('register', [AdminController::class, 'AdminRegisterStore'])->name('admin_register_store');
+    // Route::get('register', [AdminController::class, 'AdminRegister'])->name('admin_register');
+    // Route::post('register', [AdminController::class, 'AdminRegisterStore'])->name('admin_register_store');
 
     // Dashboard
     Route::get('/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin_dashboard')->middleware('admin');
+
+    // Admin Management
+    Route::middleware(['admin'])->prefix('members')->group(function () {
+        Route::get('view', [AdminController::class, 'AdminMemberView'])->name('admin_member_view');
+        Route::get('add', [AdminController::class, 'AdminMemberAdd'])->name('admin_member_add');
+        Route::post('add', [AdminController::class, 'AdminMemberAddStore'])->name('admin_member_add_store');
+        Route::get('edit/{id}', [AdminController::class, 'AdminMemberEdit'])->name('admin_member_edit');
+        Route::post('update/{id}', [AdminController::class, 'AdminMemberUpdate'])->name('admin_member_update');
+        Route::post('edit/{id}', [AdminController::class, 'AdminMemberEditStore'])->name('admin_member_edit_store');
+        Route::get('delete/{id}', [AdminController::class, 'AdminMemberDelete'])->name('admin_member_delete');
+    });
 
     // User Management
     Route::middleware(['admin'])->prefix('users')->group(function () {

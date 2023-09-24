@@ -38,11 +38,11 @@
                                 required>
                             <span class="icon_soon_bottom_right"><i class="fas fa-user-lock"></i></span>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <a class="registration" href="{{ route('admin_register') }}">Create new account</a><br>
                             <a href="{{ route('password.request') }}" class="text-white">I forgot my password</a>
                             <button type="submit" class="btn btn-blue">Login</button>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>

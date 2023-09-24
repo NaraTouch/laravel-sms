@@ -102,11 +102,11 @@
             <td><b>Date of Birth</b></td>
             <td>{{ date('d-m-Y', strtotime($details->dob)) }}</td>
         </tr>
-        <tr>
+        {{-- <tr>
             <td>11</td>
             <td><b> Employee Designaton </b></td>
             <td>{{ $details['designation']['name'] }} </td>
-        </tr>
+        </tr> --}}
         <tr>
             <td>12</td>
             <td><b>Join Date </b></td>

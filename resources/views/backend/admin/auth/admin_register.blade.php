@@ -1,4 +1,4 @@
-@extends('login_base')
+{{-- @extends('login_base')
 @section('title', 'SMY | Admin Register')
 @section('main_content')
     <div class="wrapper without_header_sidebar">
@@ -50,4 +50,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}
