@@ -8,11 +8,22 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
+use App\Library\Services\Role;
 use DB;
 
 class AdminController extends Controller
 {
-
+	protected $Role;
+	/**
+     * Create a new controller instance.
+     *
+     * @param  \App\Providers\CredentialServiceProvider  $credentialServiceProvider
+     * @return void
+     */
+    public function __construct(Role $role)
+    {
+        $this->Role = $role;
+    }
     // Admin Login Controller
     public function AdminLogin()
     {
@@ -155,7 +166,11 @@ class AdminController extends Controller
         );
 
         if (Auth::guard("admin")->attempt(["email" => $check["email"], "password" => $check["password"], "secret_code" => $check["secret_code"]])) {
-            return redirect()->route("admin_dashboard")->with($notificationSuccess);
+			// $role = $this->Role->accessStore();
+			// $request->session()->put('auth_user_session_object', $role);
+			
+			// dump($request->session()->get('auth_user_session_object'));die();
+			return redirect()->route("admin_dashboard")->with($notificationSuccess);
         } else {
             return back()->with("alert", "Email, Password or Secret Code is invalid.");
         }

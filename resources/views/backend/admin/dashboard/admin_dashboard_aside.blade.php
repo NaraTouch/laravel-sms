@@ -24,25 +24,6 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-
-            <li class="treeview {{ $prefix == 'admin/members' ? 'active' : '' }}">
-                <a href="#">
-                    <i data-feather="message-circle"></i>
-                    <span>Manage Admin</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'admin_member_view' ? 'active' : '' }}"><a
-                            href="{{ route('admin_member_view') }}"><i
-                                class="ti-more {{ $route == route('admin_member_view') ? 'active' : '' }}"></i>View
-                            Admin</a></li>
-                    <li class="{{ $route == 'admin_member_add' ? 'active' : '' }}"><a
-                            href="{{ route('admin_member_add') }}"><i class="ti-more"></i>Add Member</a></li>
-                </ul>
-            </li>
-
             <li class="treeview {{ $prefix == 'admin/users' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="message-circle"></i>
@@ -261,6 +242,38 @@
                 </ul>
             </li>
 
+            <li class="header nav-small-cap">System Setting</li>
+                <li class="treeview {{ $prefix == 'admin/members' ? 'active' : '' }}">
+                    <a href="#">
+                        <i data-feather="message-circle"></i>
+                        <span>Manage Admin</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ $route == 'admin_member_view' ? 'active' : '' }}"><a
+                                href="{{ route('admin_member_view') }}"><i
+                                    class="ti-more {{ $route == route('admin_member_view') ? 'active' : '' }}"></i>View
+                                Admin</a></li>
+                    </ul>
+                </li>
+                <li class="treeview {{ $prefix == 'admin/setting' ? 'active' : '' }}">
+                    <a href="#">
+                        <i data-feather="message-circle"></i>
+                        <span>Module</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ $route == 'module_view' ? 'active' : '' }}">
+                            <a href="{{ route('module_view') }}">
+                                <i class="ti-more {{ $route == route('module_view') ? 'active' : '' }}"> </i>View Module
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             <li>
                 <a href="{{ route('admin_logout') }}">
                     <i data-feather="lock"></i>

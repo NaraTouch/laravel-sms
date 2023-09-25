@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\AdminProfileController;
@@ -94,9 +95,22 @@ Route::prefix('admin')->group(function () {
         Route::get('add', [AdminController::class, 'AdminMemberAdd'])->name('admin_member_add');
         Route::post('add', [AdminController::class, 'AdminMemberAddStore'])->name('admin_member_add_store');
         Route::get('edit/{id}', [AdminController::class, 'AdminMemberEdit'])->name('admin_member_edit');
-        Route::post('update/{id}', [AdminController::class, 'AdminMemberUpdate'])->name('admin_member_update');
         Route::post('edit/{id}', [AdminController::class, 'AdminMemberEditStore'])->name('admin_member_edit_store');
         Route::get('delete/{id}', [AdminController::class, 'AdminMemberDelete'])->name('admin_member_delete');
+    });
+
+    // // App Setting Management
+    Route::middleware(['admin'])->prefix('setting')->group(function () {
+        Route::get('view', [SettingController::class, 'ModuleView'])->name('module_view');
+        Route::get('add', [SettingController::class, 'ModuleAdd'])->name('module_add');
+        Route::post('add', [SettingController::class, 'ModuleAddStore'])->name('module_add_store');
+        Route::get('edit/{id}', [SettingController::class, 'ModuleEdit'])->name('module_edit');
+        Route::post('edit/{id}', [SettingController::class, 'ModuleEditStore'])->name('module_edit_store');
+        Route::get('method/view/{id}', [SettingController::class, 'MethodView'])->name('method_view');
+        Route::get('method/add/{id}', [SettingController::class, 'MethodAdd'])->name('method_add');
+        Route::post('method/add/{id}', [SettingController::class, 'MethodAddStore'])->name('method_add_store');
+        Route::get('method/edit/{id}', [SettingController::class, 'MethodEdit'])->name('method_edit');
+        Route::post('method/edit/{id}', [SettingController::class, 'MethodEditStore'])->name('method_edit_store');
     });
 
     // User Management

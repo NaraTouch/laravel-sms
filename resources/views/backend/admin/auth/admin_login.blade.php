@@ -4,9 +4,17 @@
     <div class="wrapper without_header_sidebar">
         <div class="content_wrapper">
             <div class="login_page center_container">
-                <div class="center_content">
+                <div class="center_content" style="background-color:#272e48;">
                     <div class="logo">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="" class="img-fluid">
+                        <div class="ulogo">
+                            <a href="{{ route('admin_login') }}">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <img src="{{ asset('assets/images/logo-dark.png') }}" alt="Logo">
+                                    <h3><b>School</b> Management</h3>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- <img src="{{ asset('assets/images/logo.png') }}" alt="" class="img-fluid"> --}}
                     </div>
 
                     @if (Session::has('alert'))
@@ -38,11 +46,11 @@
                                 required>
                             <span class="icon_soon_bottom_right"><i class="fas fa-user-lock"></i></span>
                         </div>
-                        {{-- <div class="form-group">
-                            <a class="registration" href="{{ route('admin_register') }}">Create new account</a><br>
-                            <a href="{{ route('password.request') }}" class="text-white">I forgot my password</a>
+                        <div class="form-group">
+                            {{-- <a class="registration" href="{{ route('admin_register') }}">Create new account</a><br> --}}
+                            {{-- <a href="{{ route('password.request') }}" class="text-white">I forgot my password</a> --}}
                             <button type="submit" class="btn btn-blue">Login</button>
-                        </div> --}}
+                        </div>
                     </form>
                 </div>
             </div>
