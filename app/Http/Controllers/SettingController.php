@@ -65,7 +65,7 @@ class SettingController extends Controller
 			'message' => 'Module Create Successfully',
 			'alert-type' => 'success'
 		);
-		return redirect()->route('module_view')->with($notification);
+		return redirect()->route('module.view')->with($notification);
     }
 
     public function ModuleEdit($id)
@@ -87,7 +87,7 @@ class SettingController extends Controller
 			'message' => 'Module Create Updated Successfully',
 			'alert-type' => 'success'
 		);
-		return redirect()->route('module_view')->with($notification);
+		// return redirect()->route('module.view')->with($notification);
     }
 
     public function MethodView($id)
@@ -118,7 +118,7 @@ class SettingController extends Controller
 			'message' => 'Method Create Successfully',
 			'alert-type' => 'success'
 		);
-		return redirect()->route('module_view')->with($notification);
+		return redirect()->route('module.view')->with($notification);
     }
 
     public function MethodEdit($id)
@@ -141,6 +141,6 @@ class SettingController extends Controller
 			'message' => 'Module Create Updated Successfully',
 			'alert-type' => 'success'
 		);
-		return redirect()->route('method_view', ['id' => $sysMethod->module_id])->with($notification);
+		return redirect()->route('method.view', ['id' => $sysMethod->module_id])->with($notification);
     }
 }

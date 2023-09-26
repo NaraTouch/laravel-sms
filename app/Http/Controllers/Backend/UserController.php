@@ -12,16 +12,16 @@ use App\Models\Moderator;
 
 class UserController extends Controller
 {
-    public function AdminUserView()
+    public function UserView()
     {
         $userData = User::all();
         return view("backend.admin.dashboard.user.admin_user_view", compact("userData"));
     }
-    public function AdminUserAdd()
+    public function UserAdd()
     {
         return view("backend.admin.dashboard.user.admin_user_add");
     }
-    public function AdminUserAddStore(Request $request)
+    public function UserAddStore(Request $request)
     {
         if ($request->role == "User") {
             $validatedData = $request->validate([
@@ -42,7 +42,7 @@ class UserController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route("admin_user_view")->with($notification);
+            return redirect()->route("user.view")->with($notification);
         } else if ($request->role == "Admin") {
             $validatedData = $request->validate([
                 "email" => "required|unique:admins",
@@ -63,7 +63,7 @@ class UserController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route("admin_user_view")->with($notification);
+            return redirect()->route("user.view")->with($notification);
         } else if ($request->role == "Moderator") {
             $validatedData = $request->validate([
                 "email" => "required|unique:moderators",
@@ -83,16 +83,16 @@ class UserController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route("admin_user_view")->with($notification);
+            return redirect()->route("user.view")->with($notification);
         }
     }
 
-    public function AdminUserEdit($id)
+    public function UserEdit($id)
     {
         $editData = User::find($id);
         return view('backend.admin.dashboard.user.admin_user_edit', compact('editData'));
     }
-    public function AdminUserEditStore(Request $request, $id)
+    public function UserEditStore(Request $request, $id)
     {
         $data = User::find($id);
         $data->name = $request->name;
@@ -105,10 +105,10 @@ class UserController extends Controller
             'alert-type' => 'info'
         );
 
-        return redirect()->route("admin_user_view")->with($notification);
+        return redirect()->route("user.view")->with($notification);
     }
 
-    public function AdminUserDelete($id)
+    public function UserDelete($id)
     {
         $user = User::find($id);
         $user->delete();
@@ -118,6 +118,6 @@ class UserController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route("admin_user_view")->with($notification);
+        return redirect()->route("user.view")->with($notification);
     }
 }

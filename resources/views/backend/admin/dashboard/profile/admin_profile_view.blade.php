@@ -10,7 +10,7 @@
                             <div class="widget-user-header bg-black">
                                 <h3 class="widget-user-username">Name : {{ $admin->name }}</h3>
 
-                                <a href="{{ route('admin_profile_edit') }}" style="float: right;"
+                                <a href="{{ route('profile.edit') }}" style="float: right;"
                                     class="btn btn-rounded btn-success mb-5"> Edit Profile</a>
 
                                 <h6 class="widget-user-desc">Type : Administrator</h6>

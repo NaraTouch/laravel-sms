@@ -13,7 +13,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col">
-                                <form method="post" action="{{ route('admin_profile_edit_store') }}"
+                                <form method="post" action="{{ route('store.user.profile') }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -96,7 +96,7 @@
                                             </div>
                                             <div class="text-xs-right">
                                                 <a
-                                                    href="{{ route('admin_profile_view') }}"class="btn btn-rounded btn-danger mb-5">Cancel</a>
+                                                    href="{{ route('profile.view') }}"class="btn btn-rounded btn-danger mb-5">Cancel</a>
                                                 <input type="submit" class="btn btn-rounded btn-info mb-5" value="Update">
                                             </div>
                                 </form>

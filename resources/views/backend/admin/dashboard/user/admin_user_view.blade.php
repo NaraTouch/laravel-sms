@@ -7,7 +7,7 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">User List</h3>
-                        <a href="{{ route('admin_user_add') }}" style="float:right;"
+                        <a href="{{ route('user.add') }}" style="float:right;"
                             class="btn btn-rounded btn-success mb-5">Add
                             User</a>
                     </div>
@@ -33,9 +33,9 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->status }}</td>
                                             <td>
-                                                <a href="{{ route('admin_user_edit', $user->id) }}"
+                                                <a href="{{ route('user.edit', $user->id) }}"
                                                     class="btn btn-info">Edit</a>
-                                                <a href="{{ route('admin_user_delete', $user->id) }}" class="btn btn-danger"
+                                                <a href="{{ route('delete.user', $user->id) }}" class="btn btn-danger"
                                                     id="delete">Delete</a>
                                             </td>
                                         </tr>

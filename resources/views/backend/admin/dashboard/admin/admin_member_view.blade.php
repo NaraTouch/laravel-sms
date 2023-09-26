@@ -9,7 +9,7 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Admin List</h3>
-                                <a href="{{ route('admin_member_add') }}" style="float: right;"
+                                <a href="{{ route('admin.member.add') }}" style="float: right;"
                                     class="btn btn-rounded btn-success mb-5"> Add Admin</a>
                             </div>
                             <div class="box-body">
@@ -46,10 +46,10 @@
                                                     {{-- <td> {{ $admin->join_date }}</td>
                                                     <td> {{ $admin->salary }}</td> --}}
                                                     <td>
-                                                        <a href="{{ route('admin_member_edit', $admin->id) }}"
+                                                        <a href="{{ route('admin.member.edit', $admin->id) }}"
                                                             class="btn btn-info">Edit</a>
                                                         <a target="_blank"
-                                                            href="{{ route('admin_member_delete', $admin->id) }}"
+                                                            href="{{ route('admin.member.delete', $admin->id) }}"
                                                             class="btn btn-danger">Disactive</a>
                                                     </td>
                                                 </tr>

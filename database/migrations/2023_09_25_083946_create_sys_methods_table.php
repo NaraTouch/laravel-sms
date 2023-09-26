@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('module_id');
             $table->text('description')->nullable();
             $table->tinyInteger('is_menu')->default(1)->comment('0=hidden,1=show');
-            $table->string('sys_name');
+            $table->string('sys_name')->unique();
             $table->timestamps();
         });
     }

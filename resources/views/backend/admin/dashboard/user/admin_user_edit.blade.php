@@ -11,7 +11,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col">
-                                <form method="post" action="{{ route('admin_user_edit_store', $editData->id) }}">
+                                <form method="post" action="{{ route('update.user', $editData->id) }}">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
@@ -37,7 +37,7 @@
                                     <br>
                                     <div class="text-xs-right">
                                         <a
-                                            href="{{ route('admin_user_view') }}"class="btn btn-rounded btn-danger mb-5">Cancel</a>
+                                            href="{{ route('user.view') }}"class="btn btn-rounded btn-danger mb-5">Cancel</a>
                                         <input type="submit" class="btn btn-rounded btn-success mb-5" value="Update">
                                     </div>
                                 </form>

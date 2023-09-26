@@ -9,7 +9,7 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Module List</h3>
-                                <a href="{{ route('module_add') }}" style="float: right;"
+                                <a href="{{ route('module.add') }}" style="float: right;"
                                     class="btn btn-rounded btn-success mb-5"> Add Module</a>
                             </div>
                             <div class="box-body">
@@ -41,11 +41,11 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('module_edit', $module['id']) }}"
+                                                        <a href="{{ route('module.edit', $module['id']) }}"
                                                             class="btn btn-info">Edit</a>
-                                                        <a href="{{ route('method_add', $module['id']) }}"
+                                                        <a href="{{ route('method.add', $module['id']) }}"
                                                             class="btn btn-info">Add Method</a>
-                                                        <a href="{{ route('method_view', $module['id']) }}"
+                                                        <a href="{{ route('method.view', $module['id']) }}"
                                                             class="btn btn-success">View Method</a>
                                                     </td>
                                                 </tr>

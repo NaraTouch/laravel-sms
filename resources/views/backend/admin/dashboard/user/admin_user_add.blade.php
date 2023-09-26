@@ -12,7 +12,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col">
-                                <form method="post" action="{{ route('admin_user_add_store') }}">
+                                <form method="post" action="{{ route('store.user') }}">
                                     @csrf
                                     <div class="row">
                                         <div class="col-12">
@@ -67,7 +67,7 @@
                                             </div>
                                             <div class="text-xs-right">
                                                 <a
-                                                    href="{{ route('admin_user_view') }}"class="btn btn-rounded btn-danger mb-5">Cancel</a>
+                                                    href="{{ route('user.view') }}"class="btn btn-rounded btn-danger mb-5">Cancel</a>
                                                 <input type="submit" class="btn btn-rounded btn-info mb-5" value="Submit">
                                             </div>
                                         </div>

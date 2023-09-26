@@ -36,7 +36,7 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('method_edit', $method->id) }}"
+                                                        <a href="{{ route('method.edit', $method->id) }}"
                                                             class="btn btn-info">Edit</a>
                                                     </td>
                                                 </tr>

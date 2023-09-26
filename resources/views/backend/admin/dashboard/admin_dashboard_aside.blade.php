@@ -18,8 +18,8 @@
 
         <ul class="sidebar-menu" data-widget="tree">
 
-            <li class="{{ $route == 'admin_dashboard' ? 'active' : '' }}">
-                <a href="{{ route('admin_dashboard') }}">
+            <li class="{{ $route == 'admin.dashboard' ? 'active' : '' }}">
+                <a href="{{ route('admin.dashboard') }}">
                     <i data-feather="pie-chart"></i>
                     <span>Dashboard</span>
                 </a>
@@ -33,12 +33,12 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ $route == 'admin_user_view' ? 'active' : '' }}"><a
-                            href="{{ route('admin_user_view') }}"><i
-                                class="ti-more {{ $route == route('admin_user_view') ? 'active' : '' }}"></i>View
+                    <li class="{{ $route == 'user.view' ? 'active' : '' }}"><a
+                            href="{{ route('user.view') }}"><i
+                                class="ti-more {{ $route == route('user.view') ? 'active' : '' }}"></i>View
                             User</a></li>
-                    <li class="{{ $route == 'admin_user_add' ? 'active' : '' }}"><a
-                            href="{{ route('admin_user_add') }}"><i class="ti-more"></i>Add User</a></li>
+                    <li class="{{ $route == 'user.add' ? 'active' : '' }}"><a
+                            href="{{ route('user.add') }}"><i class="ti-more"></i>Add User</a></li>
                 </ul>
             </li>
 
@@ -50,16 +50,16 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ $route == 'admin_profile_view' ? 'active' : '' }}"><a
-                            href="{{ route('admin_profile_view') }}"><i class="ti-more"></i>Profile View</a>
+                    <li class="{{ $route == 'profile.view' ? 'active' : '' }}"><a
+                            href="{{ route('profile.view') }}"><i class="ti-more"></i>Profile View</a>
                     </li>
 
-                    <li class="{{ $route == 'admin_profile_edit' ? 'active' : '' }}"><a
-                            href="{{ route('admin_profile_edit') }}"><i class="ti-more"></i>Profile Edit</a>
+                    <li class="{{ $route == 'profile.user.add' ? 'active' : '' }}"><a
+                            href="{{ route('profile.user.add') }}"><i class="ti-more"></i>Profile Edit</a>
                     </li>
 
-                    <li class="{{ $route == 'admin_password_view' ? 'active' : '' }}"><a
-                            href="{{ route('admin_password_view') }}"><i class="ti-more"></i>Change Password</a>
+                    <li class="{{ $route == 'password.view' ? 'active' : '' }}"><a
+                            href="{{ route('password.view') }}"><i class="ti-more"></i>Change Password</a>
                     </li>
 
                 </ul>
@@ -252,9 +252,9 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="{{ $route == 'admin_member_view' ? 'active' : '' }}"><a
-                                href="{{ route('admin_member_view') }}"><i
-                                    class="ti-more {{ $route == route('admin_member_view') ? 'active' : '' }}"></i>View
+                        <li class="{{ $route == 'admin.member.view' ? 'active' : '' }}"><a
+                                href="{{ route('admin.member.view') }}"><i
+                                    class="ti-more {{ $route == route('admin.member.view') ? 'active' : '' }}"></i>View
                                 Admin</a></li>
                     </ul>
                 </li>
@@ -267,9 +267,9 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="{{ $route == 'module_view' ? 'active' : '' }}">
-                            <a href="{{ route('module_view') }}">
-                                <i class="ti-more {{ $route == route('module_view') ? 'active' : '' }}"> </i>View Module
+                        <li class="{{ $route == 'module.view' ? 'active' : '' }}">
+                            <a href="{{ route('module.view') }}">
+                                <i class="ti-more {{ $route == route('module.view') ? 'active' : '' }}"> </i>View Module
                             </a>
                         </li>
                     </ul>
@@ -283,9 +283,9 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="{{ $route == 'role_view' ? 'active' : '' }}">
-                            <a href="{{ route('role_view') }}">
-                                <i class="ti-more {{ $route == route('role_view') ? 'active' : '' }}"> </i>View Role
+                        <li class="{{ $route == 'role.view' ? 'active' : '' }}">
+                            <a href="{{ route('role.view') }}">
+                                <i class="ti-more {{ $route == route('role.view') ? 'active' : '' }}"> </i>View Role
                             </a>
                         </li>
                     </ul>

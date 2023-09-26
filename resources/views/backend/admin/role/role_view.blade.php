@@ -9,7 +9,7 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Role List</h3>
-                                <a href="{{ route('role_add') }}" style="float: right;"
+                                <a href="{{ route('role.add') }}" style="float: right;"
                                     class="btn btn-rounded btn-success mb-5"> Add Role</a>
                             </div>
                             <div class="box-body">
@@ -38,13 +38,13 @@
                                                     </td>
                                                     <td> {{ $role->description }}</td>
                                                     <td>
-                                                        <a href="{{ route('role_edit', $role->id) }}"
+                                                        <a href="{{ route('edit.role', $role->id) }}"
                                                             class="btn btn-info">Edit</a>
                                                         @if (!$role->status)
-                                                            <a href="{{ route('role_update', $role->id) }}"
+                                                            <a href="{{ route('role.delete', $role->id) }}"
                                                                 class="btn btn-success">Enable</a>
                                                         @else
-                                                            <a href="{{ route('role_update', $role->id) }}"
+                                                            <a href="{{ route('role.delete', $role->id) }}"
                                                                 class="btn btn-danger">Disabled</a>
                                                         @endif
                                                         

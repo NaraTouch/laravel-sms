@@ -13,7 +13,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col">
-                                <form method="post" action="{{ route('method_add_store', $addData->id) }}"
+                                <form method="post" action="{{ route('store.method', $addData->id) }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">

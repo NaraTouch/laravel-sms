@@ -9,7 +9,7 @@
                         <h4 class="box-title">Change Password</h4>
                     </div>
                     <div class="box-body">
-                        <form method="post" action="{{ route('admin_password_update') }}">
+                        <form method="post" action="{{ route('update.password') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-12">

@@ -13,7 +13,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col">
-                                <form method="post" action="{{ route('module_add_store') }}"
+                                <form method="post" action="{{ route('store.module') }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">

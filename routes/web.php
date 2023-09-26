@@ -88,60 +88,60 @@ Route::prefix('admin')->group(function () {
     // Route::post('register', [AdminController::class, 'AdminRegisterStore'])->name('admin_register_store');
 
     // Dashboard
-    Route::get('/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin_dashboard')->middleware('admin');
+    Route::get('/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard')->middleware('admin');
 
     // Admin Management
     Route::middleware(['admin'])->prefix('members')->group(function () {
-        Route::get('view', [AdminController::class, 'AdminMemberView'])->name('admin_member_view');
-        Route::get('add', [AdminController::class, 'AdminMemberAdd'])->name('admin_member_add');
-        Route::post('add', [AdminController::class, 'AdminMemberAddStore'])->name('admin_member_add_store');
-        Route::get('edit/{id}', [AdminController::class, 'AdminMemberEdit'])->name('admin_member_edit');
-        Route::post('edit/{id}', [AdminController::class, 'AdminMemberEditStore'])->name('admin_member_edit_store');
-        Route::get('delete/{id}', [AdminController::class, 'AdminMemberDelete'])->name('admin_member_delete');
+        Route::get('view', [AdminController::class, 'AdminMemberView'])->name('admin.member.view');
+        Route::get('add', [AdminController::class, 'AdminMemberAdd'])->name('admin.member.add');
+        Route::post('add', [AdminController::class, 'AdminMemberAddStore'])->name('store.admin.member');
+        Route::get('edit/{id}', [AdminController::class, 'AdminMemberEdit'])->name('admin.member.edit');
+        Route::post('edit/{id}', [AdminController::class, 'AdminMemberEditStore'])->name('update.admin.member');
+        Route::get('delete/{id}', [AdminController::class, 'AdminMemberDelete'])->name('admin.member.delete');
     });
 
     // App Setting Management
     Route::middleware(['admin'])->prefix('setting')->group(function () {
-        Route::get('view', [SettingController::class, 'ModuleView'])->name('module_view');
-        Route::get('add', [SettingController::class, 'ModuleAdd'])->name('module_add');
-        Route::post('add', [SettingController::class, 'ModuleAddStore'])->name('module_add_store');
-        Route::get('edit/{id}', [SettingController::class, 'ModuleEdit'])->name('module_edit');
-        Route::post('edit/{id}', [SettingController::class, 'ModuleEditStore'])->name('module_edit_store');
-        Route::get('method/view/{id}', [SettingController::class, 'MethodView'])->name('method_view');
-        Route::get('method/add/{id}', [SettingController::class, 'MethodAdd'])->name('method_add');
-        Route::post('method/add/{id}', [SettingController::class, 'MethodAddStore'])->name('method_add_store');
-        Route::get('method/edit/{id}', [SettingController::class, 'MethodEdit'])->name('method_edit');
-        Route::post('method/edit/{id}', [SettingController::class, 'MethodEditStore'])->name('method_edit_store');
+        Route::get('view', [SettingController::class, 'ModuleView'])->name('module.view');
+        Route::get('add', [SettingController::class, 'ModuleAdd'])->name('module.add');
+        Route::post('add', [SettingController::class, 'ModuleAddStore'])->name('store.module');//
+        Route::get('edit/{id}', [SettingController::class, 'ModuleEdit'])->name('module.edit');
+        Route::post('edit/{id}', [SettingController::class, 'ModuleEditStore'])->name('update.module');//
+        Route::get('method/view/{id}', [SettingController::class, 'MethodView'])->name('method.view');
+        Route::get('method/add/{id}', [SettingController::class, 'MethodAdd'])->name('method.add');
+        Route::post('method/add/{id}', [SettingController::class, 'MethodAddStore'])->name('store.method');
+        Route::get('method/edit/{id}', [SettingController::class, 'MethodEdit'])->name('method.edit');
+        Route::post('method/edit/{id}', [SettingController::class, 'MethodEditStore'])->name('update.method');
     });
 
     // App Role Management
     Route::middleware(['admin'])->prefix('role')->group(function () {
-        Route::get('view', [RoleController::class, 'RoleView'])->name('role_view');
-        Route::get('add', [RoleController::class, 'RoleAdd'])->name('role_add');
-        Route::post('add', [RoleController::class, 'RoleAddStore'])->name('role_add_store');
-        Route::get('edit/{id}', [RoleController::class, 'RoleEdit'])->name('role_edit');
-        Route::post('edit/{id}', [RoleController::class, 'RoleEditStore'])->name('role_edit_store');
-        Route::get('update/{id}', [RoleController::class, 'RoleUpdate'])->name('role_update');
+        Route::get('view', [RoleController::class, 'RoleView'])->name('role.view');
+        Route::get('add', [RoleController::class, 'RoleAdd'])->name('role.add');
+        Route::post('add', [RoleController::class, 'RoleAddStore'])->name('store.role');
+        Route::get('edit/{id}', [RoleController::class, 'RoleEdit'])->name('role.edit');
+        Route::post('edit/{id}', [RoleController::class, 'RoleEditStore'])->name('update.role');
+        Route::get('update/{id}', [RoleController::class, 'RoleDelete'])->name('role.delete');
     });
 
     // User Management
     Route::middleware(['admin'])->prefix('users')->group(function () {
-        Route::get('view', [UserController::class, 'AdminUserView'])->name('admin_user_view');
-        Route::get('add', [UserController::class, 'AdminUserAdd'])->name('admin_user_add');
-        Route::post('add', [UserController::class, 'AdminUserAddStore'])->name('admin_user_add_store');
-        Route::get('edit/{id}', [UserController::class, 'AdminUserEdit'])->name('admin_user_edit');
-        Route::post('edit/{id}', [UserController::class, 'AdminUserEditStore'])->name('admin_user_edit_store');
-        Route::get('delete/{id}', [UserController::class, 'AdminUserDelete'])->name('admin_user_delete');
+        Route::get('view', [UserController::class, 'UserView'])->name('user.view');
+        Route::get('add', [UserController::class, 'UserAdd'])->name('user.add');
+        Route::post('add', [UserController::class, 'UserAddStore'])->name('store.user');
+        Route::get('edit/{id}', [UserController::class, 'UserEdit'])->name('user.edit');
+        Route::post('edit/{id}', [UserController::class, 'UserEditStore'])->name('update.user');
+        Route::get('delete/{id}', [UserController::class, 'UserDelete'])->name('delete.user');
     });
 
     Route::middleware(['admin'])->prefix('profile')->group(function () {
         // Profile
-        Route::get('view', [AdminProfileController::class, 'AdminProfileView'])->name('admin_profile_view');
-        Route::get('edit', [AdminProfileController::class, 'AdminProfileEdit'])->name('admin_profile_edit');
-        Route::post('edit', [AdminProfileController::class, 'AdminProfileEditStore'])->name('admin_profile_edit_store');
+        Route::get('view', [AdminProfileController::class, 'AdminProfileView'])->name('profile.view');
+        Route::get('edit', [AdminProfileController::class, 'AdminProfileEdit'])->name('profile.user.add');
+        Route::post('edit', [AdminProfileController::class, 'AdminProfileEditStore'])->name('store.user.profile');
 
-        Route::get('change-password', [AdminProfileController::class, 'AdminPasswordView'])->name('admin_password_view');
-        Route::post('change-password', [AdminProfileController::class, 'AdminPasswordUpdate'])->name('admin_password_update');
+        Route::get('change-password', [AdminProfileController::class, 'AdminPasswordView'])->name('password.view');
+        Route::post('change-password', [AdminProfileController::class, 'AdminPasswordUpdate'])->name('update.password');
     });
 
     Route::middleware(['admin'])->prefix('setups')->group(function () {
@@ -231,7 +231,7 @@ Route::prefix('admin')->group(function () {
     });
 
 
-    Route::prefix('students')->group(function () {
+    Route::middleware(['admin'])->prefix('students')->group(function () {
         // Student Registration Routes 
         Route::get('reg/view', [StudentRegController::class, 'StudentRegView'])->name('student.registration.view');
         Route::get('reg/Add', [StudentRegController::class, 'StudentRegAdd'])->name('student.registration.add');
@@ -261,7 +261,7 @@ Route::prefix('admin')->group(function () {
 
 
     /// Employee Management Routes
-    Route::prefix('employees')->group(function () {
+    Route::middleware(['admin'])->prefix('employees')->group(function () {
 
         Route::get('reg/employee/view', [EmployeeRegController::class, 'EmployeeView'])->name('employee.registration.view');
         Route::get('reg/employee/add', [EmployeeRegController::class, 'EmployeeAdd'])->name('employee.registration.add');
@@ -300,7 +300,12 @@ Route::prefix('admin')->group(function () {
     });
 
 
-    Route::prefix('marks')->group(function () {
+    Route::middleware(['admin'])->prefix('marks')->group(function () {
+
+        // ajax request
+        Route::get('marks/getsubject', [DefaultController::class, 'GetSubject'])->name('marks.getsubject');
+        // ajax request
+        Route::get('student/marks/getstudents', [DefaultController::class, 'GetStudents'])->name('student.marks.getstudents');
         // Marks Management Routes
         Route::get('marks/entry/add', [MarksController::class, 'MarksAdd'])->name('marks.entry.add');
         Route::post('marks/entry/store', [MarksController::class, 'MarksStore'])->name('marks.entry.store');
@@ -317,13 +322,8 @@ Route::prefix('admin')->group(function () {
         Route::post('marks/grade/update/{id}', [GradeController::class, 'MarksGradeUpdate'])->name('update.marks.grade');
     });
 
-    // ajax request
-    Route::get('marks/getsubject', [DefaultController::class, 'GetSubject'])->name('marks.getsubject');
-    Route::get('student/marks/getstudents', [DefaultController::class, 'GetStudents'])->name('student.marks.getstudents');
-
-
     /// Account Management Routes  
-    Route::prefix('accounts')->group(function () {
+    Route::middleware(['admin'])->prefix('accounts')->group(function () {
         Route::get('student/fee/view', [StudentFeeController::class, 'StudentFeeView'])->name('student.fee.view');
         Route::get('student/fee/add', [StudentFeeController::class, 'StudentFeeAdd'])->name('student.fee.add');
         Route::get('student/fee/getstudent', [StudentFeeController::class, 'StudentFeeGetStudent'])->name('account.fee.getstudent');
@@ -343,11 +343,8 @@ Route::prefix('admin')->group(function () {
         Route::post('other/cost/update/{id}', [OtherCostController::class, 'OtherCostUpdate'])->name('update.other.cost');
     });
 
-
-
-
     /// Report Management All Routes  
-    Route::prefix('reports')->group(function () {
+    Route::middleware(['admin'])->prefix('reports')->group(function () {
 
         Route::get('monthly/profit/view', [ProfitController::class, 'MonthlyProfitView'])->name('monthly.profit.view');
         Route::get('monthly/profit/datewais', [ProfitController::class, 'MonthlyProfitDatewais'])->name('report.profit.datewais.get');

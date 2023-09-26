@@ -23,7 +23,7 @@
     <div class="content-wrapper">
         <div class="container-full">
             <section class="content">
-                <form method="post" action="{{ route('role_edit_store', $editData->id) }}"enctype="multipart/form-data">
+                <form method="post" action="{{ route('update.role', $editData->id) }}"enctype="multipart/form-data">
                     @csrf
                     <div class="box">
                         <div class="box-header with-border">

@@ -48,7 +48,7 @@ class AdminProfileController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('admin_profile_view')->with($notification);
+        return redirect()->route('profile.view')->with($notification);
     }
 
 

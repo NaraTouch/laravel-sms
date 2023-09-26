@@ -13,7 +13,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col">
-                                <form method="post" action="{{ route('method_edit_store', $editData->id) }}"
+                                <form method="post" action="{{ route('update.method', $editData->id) }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">

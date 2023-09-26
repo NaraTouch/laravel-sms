@@ -1,5 +1,5 @@
 @extends('backend.admin.dashboard.admin_master')
-@section('title', 'SMS | Dashboard - Employee add')
+@section('title', 'SMS | Dashboard - Admin add')
 @section('admin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -13,7 +13,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col">
-                                <form method="post" action="{{ route('admin_member_add_store') }}"
+                                <form method="post" action="{{ route('store.admin.member') }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">

@@ -50,7 +50,7 @@ class AdminController extends Controller
 			'message' => 'Admin disable Successfully',
 			'alert-type' => 'info'
 		);
-		return redirect()->route('admin_member_view')->with($notification);
+		return redirect()->route('admin.member.view')->with($notification);
 	}
 
 	public function AdminMemberAdd()
@@ -65,14 +65,14 @@ class AdminController extends Controller
 				'message' => 'password and Confirm password cannot empty.',
 				'alert-type' => 'error'
 			);
-			return redirect()->route('admin_member_add')->with($notification);
+			return redirect()->route('admin.member.add')->with($notification);
 		}
 		if ($request->password != $request->confirm_password){
 			$notification = array(
 				'message' => 'password and Confirm password is not match.',
 				'alert-type' => 'error'
 			);
-			return redirect()->route('admin_member_add')->with($notification);
+			return redirect()->route('admin.member.add')->with($notification);
 		}
         Admin::insert([
             "name" => $request->name,
@@ -91,7 +91,7 @@ class AdminController extends Controller
 			'message' => 'Admin Registration Successfully',
 			'alert-type' => 'success'
 		);
-		return redirect()->route('admin_member_view')->with($notification);
+		return redirect()->route('admin.member.view')->with($notification);
     }
 
     public function AdminMemberEdit($id)
@@ -122,21 +122,21 @@ class AdminController extends Controller
 					'message' => 'Current password is not match.',
 					'alert-type' => 'error'
 				);
-				return redirect()->route('admin_member_edit', ['id' => $id])->with($notification);
+				return redirect()->route('admin.member.edit', ['id' => $id])->with($notification);
 			}
 			if (!$request->new_password || !$request->confirm_password){
 				$notification = array(
 					'message' => 'New password and Confirm password cannot empty.',
 					'alert-type' => 'error'
 				);
-				return redirect()->route('admin_member_edit', ['id' => $id])->with($notification);
+				return redirect()->route('admin.member.edit', ['id' => $id])->with($notification);
 			}
 			if ($request->new_password != $request->confirm_password){
 				$notification = array(
 					'message' => 'New password and Confirm password is not match.',
 					'alert-type' => 'error'
 				);
-				return redirect()->route('admin_member_edit', ['id' => $id])->with($notification);
+				return redirect()->route('admin.member.edit', ['id' => $id])->with($notification);
 			}
 			$admin->password = Hash::make($request->new_password);
 		}
@@ -153,7 +153,7 @@ class AdminController extends Controller
 			'message' => 'Admin Registration Updated Successfully',
 			'alert-type' => 'success'
 		);
-		return redirect()->route('admin_member_view')->with($notification);
+		return redirect()->route('admin.member.view')->with($notification);
 	}
 
     public function AdminLoginStore(Request $request)
@@ -166,11 +166,10 @@ class AdminController extends Controller
         );
 
         if (Auth::guard("admin")->attempt(["email" => $check["email"], "password" => $check["password"], "secret_code" => $check["secret_code"]])) {
-			// $role = $this->Role->accessStore();
-			// $request->session()->put('auth_user_session_object', $role);
-			
-			// dump($request->session()->get('auth_user_session_object'));die();
-			return redirect()->route("admin_dashboard")->with($notificationSuccess);
+			$user = Auth::guard("admin")->user();
+			$role = $this->Role->AccessStore($user);
+			$request->session()->put('_session', $role);
+			return redirect()->route("admin.dashboard")->with($notificationSuccess);
         } else {
             return back()->with("alert", "Email, Password or Secret Code is invalid.");
         }
@@ -182,9 +181,10 @@ class AdminController extends Controller
         }
     }
 
-    public function AdminLogout()
+    public function AdminLogout(Request $request)
     {
         Auth::guard("admin")->logout();
+		$request->session()->forget('_session');
         return redirect()->route("admin_login")->with("alert", "Admin Logout successfully.");
     }
 
