@@ -101,7 +101,7 @@ class AdminController extends Controller
 		return view('backend.admin.dashboard.admin.admin_member_edit', $data);
 	}
     
-    public function AdminMemberUpdate(Request $request, $id)
+    public function AdminMemberEditStore(Request $request, $id)
 	{
 		$admin = Admin::find($id);
 		$admin->name = $request->name;

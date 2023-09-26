@@ -274,6 +274,22 @@
                         </li>
                     </ul>
                 </li>
+                <li class="treeview {{ $prefix == 'admin/role' ? 'active' : '' }}">
+                    <a href="#">
+                        <i data-feather="message-circle"></i>
+                        <span>Role</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ $route == 'role_view' ? 'active' : '' }}">
+                            <a href="{{ route('role_view') }}">
+                                <i class="ti-more {{ $route == route('role_view') ? 'active' : '' }}"> </i>View Role
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             <li>
                 <a href="{{ route('admin_logout') }}">
                     <i data-feather="lock"></i>

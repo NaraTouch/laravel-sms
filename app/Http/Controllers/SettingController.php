@@ -107,7 +107,8 @@ class SettingController extends Controller
         SysMethod::insert([
             "name" => $request->name,
             "module_id" => $id,
-            "status" => $request->status,
+            "is_menu" => $request->is_menu,
+            "sys_name" => $request->sys_name,
             "description" => $request->description,
             "created_at" => Carbon::now(),
             "updated_at" => Carbon::now(),

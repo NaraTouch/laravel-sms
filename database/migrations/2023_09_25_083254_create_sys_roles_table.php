@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sys_roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->tinyInteger('status')->default(1)->comment('0=hidden,1=show');
             $table->text('description')->nullable();
             $table->timestamps();
         });

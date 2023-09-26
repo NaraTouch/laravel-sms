@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\AdminProfileController;
@@ -99,7 +100,7 @@ Route::prefix('admin')->group(function () {
         Route::get('delete/{id}', [AdminController::class, 'AdminMemberDelete'])->name('admin_member_delete');
     });
 
-    // // App Setting Management
+    // App Setting Management
     Route::middleware(['admin'])->prefix('setting')->group(function () {
         Route::get('view', [SettingController::class, 'ModuleView'])->name('module_view');
         Route::get('add', [SettingController::class, 'ModuleAdd'])->name('module_add');
@@ -111,6 +112,16 @@ Route::prefix('admin')->group(function () {
         Route::post('method/add/{id}', [SettingController::class, 'MethodAddStore'])->name('method_add_store');
         Route::get('method/edit/{id}', [SettingController::class, 'MethodEdit'])->name('method_edit');
         Route::post('method/edit/{id}', [SettingController::class, 'MethodEditStore'])->name('method_edit_store');
+    });
+
+    // App Role Management
+    Route::middleware(['admin'])->prefix('role')->group(function () {
+        Route::get('view', [RoleController::class, 'RoleView'])->name('role_view');
+        Route::get('add', [RoleController::class, 'RoleAdd'])->name('role_add');
+        Route::post('add', [RoleController::class, 'RoleAddStore'])->name('role_add_store');
+        Route::get('edit/{id}', [RoleController::class, 'RoleEdit'])->name('role_edit');
+        Route::post('edit/{id}', [RoleController::class, 'RoleEditStore'])->name('role_edit_store');
+        Route::get('update/{id}', [RoleController::class, 'RoleUpdate'])->name('role_update');
     });
 
     // User Management
@@ -249,7 +260,7 @@ Route::prefix('admin')->group(function () {
     });
 
 
-    /// Employee Registration Routes
+    /// Employee Management Routes
     Route::prefix('employees')->group(function () {
 
         Route::get('reg/employee/view', [EmployeeRegController::class, 'EmployeeView'])->name('employee.registration.view');
@@ -306,6 +317,7 @@ Route::prefix('admin')->group(function () {
         Route::post('marks/grade/update/{id}', [GradeController::class, 'MarksGradeUpdate'])->name('update.marks.grade');
     });
 
+    // ajax request
     Route::get('marks/getsubject', [DefaultController::class, 'GetSubject'])->name('marks.getsubject');
     Route::get('student/marks/getstudents', [DefaultController::class, 'GetStudents'])->name('student.marks.getstudents');
 
@@ -345,7 +357,6 @@ Route::prefix('admin')->group(function () {
         Route::get('marksheet/generate/view', [MarkSheetController::class, 'MarkSheetView'])->name('marksheet.generate.view');
         Route::get('marksheet/generate/get', [MarkSheetController::class, 'MarkSheetGet'])->name('report.marksheet.get');
 
-
         // Attendance Report Routes 
         Route::get('attendance/report/view', [AttendReportController::class, 'AttenReportView'])->name('attendance.report.view');
         Route::get('report/attendance/get', [AttendReportController::class, 'AttenReportGet'])->name('report.attendance.get');
@@ -360,9 +371,6 @@ Route::prefix('admin')->group(function () {
     });
 });
 // End Admin routes
-
-
-
 
 // Moderator routes
 Route::prefix('moderator')->group(function () {
