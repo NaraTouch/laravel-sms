@@ -101,22 +101,22 @@ class RoleController extends Controller
         $role->status = $request->status;
         $role->description = $request->description;
         $role->updated_at = Carbon::now();
-        // $role->save();
-        // DB::table('sys_role_module')->where('role_id', $id)->delete();
-        // DB::table('sys_role_method')->where('role_id', $id)->delete();
-        // $module = self::SysRoleModuleData($request->module, $id);
-        // $method = self::SysRoleMethodData($request->method, $id);
-        // if ($module) {
-        //     self::saveArray('sys_role_module', $module);
-        // }
-        // if ($method) {
-        //     self::saveArray('sys_role_method', $method);
-        // }
-        // $notification = array(
-		// 	'message' => 'Role Create Successfully',
-		// 	'alert-type' => 'success'
-		// );
-		// return redirect()->route('role.view')->with($notification);
+        $role->save();
+        DB::table('sys_role_module')->where('role_id', $id)->delete();
+        DB::table('sys_role_method')->where('role_id', $id)->delete();
+        $module = self::SysRoleModuleData($request->module, $id);
+        $method = self::SysRoleMethodData($request->method, $id);
+        if ($module) {
+            self::saveArray('sys_role_module', $module);
+        }
+        if ($method) {
+            self::saveArray('sys_role_method', $method);
+        }
+        $notification = array(
+			'message' => 'Role Create Successfully',
+			'alert-type' => 'success'
+		);
+		return redirect()->route('role.view')->with($notification);
     }
 
     private static function saveArray($table = null, $data = [])

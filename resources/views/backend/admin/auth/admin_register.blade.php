@@ -42,7 +42,7 @@
                             <span class="icon_soon_bottom_right"><i class="fas fa-unlock"></i></span>
                         </div>
                         <div class="form-group">
-                            <a class="registration" href="{{ route('admin_login') }}">Already have an account</a><br>
+                            <a class="registration" href="{{ route('admin.login') }}">Already have an account</a><br>
                             <button type="submit" class="btn btn-blue">Signup</button>
                         </div>
                     </form>

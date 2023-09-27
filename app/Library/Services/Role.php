@@ -20,7 +20,7 @@ class Role
     private static function RoleListById($id)
     {
         $url = [];
-        $roleListById = SysRole::RoleListById($id);
+        $roleListById = SysRole::RoleListById($id, 'sort');
         if ($roleListById) {
             $roleListById = $roleListById->sortBy('group');
             foreach ($roleListById as $key => $value) {

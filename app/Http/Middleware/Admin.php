@@ -23,7 +23,6 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        
         if (!Auth::guard('admin')->check()) {
             return redirect()->route("admin_login")->with("alert", "Please login first.");
         }

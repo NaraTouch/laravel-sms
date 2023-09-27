@@ -7,7 +7,7 @@
                 <div class="center_content" style="background-color:#272e48;">
                     <div class="logo">
                         <div class="ulogo">
-                            <a href="{{ route('admin_login') }}">
+                            <a href="{{ route('admin.login') }}">
                                 <div class="d-flex align-items-center justify-content-center">
                                     <img src="{{ asset('assets/images/logo-dark.png') }}" alt="Logo">
                                     <h3><b>School</b> Management</h3>
@@ -26,7 +26,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('admin_login_store') }}" class="d-block" method="post">
+                    <form action="{{ route('store.admin.login') }}" class="d-block" method="post">
                         @csrf
                         <div class="form-group icon_parent">
                             <label for="email">Email</label>

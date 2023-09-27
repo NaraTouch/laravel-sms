@@ -75,15 +75,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-
-
-
 // Admin routes
 Route::prefix('admin')->group(function () {
     // Auth
-    Route::get('login', [AdminController::class, 'AdminLogin'])->name('admin_login');
-    Route::post('login', [AdminController::class, 'AdminLoginStore'])->name('admin_login_store');
-    Route::get('logout', [AdminController::class, 'AdminLogout'])->name('admin_logout')->middleware('admin');
+    Route::get('login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+    Route::post('login', [AdminController::class, 'AdminLoginStore'])->name('store.admin.login');
+    Route::get('logout', [AdminController::class, 'AdminLogout'])->name('admin.logout')->middleware('admin');
     // Route::get('register', [AdminController::class, 'AdminRegister'])->name('admin_register');
     // Route::post('register', [AdminController::class, 'AdminRegisterStore'])->name('admin_register_store');
 

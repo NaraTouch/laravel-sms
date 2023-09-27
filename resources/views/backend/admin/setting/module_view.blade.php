@@ -18,7 +18,7 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">SL</th>
-                                                <th>Name</th>
+                                                <th>Positio & Name & Icon</th>
                                                 <th>Group</th>
                                                 <th>Methods</th>
                                                 <th width="25%">Action</th>
@@ -28,7 +28,12 @@
                                             @foreach ($allData as $key => $module)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td> {{ $module['name'] }}</td>
+                                                    <td> {{ $module['sys_module_position'] }}.
+                                                        <span>
+                                                            <i data-feather="{{$module['icon']}}"></i> 
+                                                        </span>
+                                                         {{ $module['name'] }}
+                                                    </td>
                                                     <td> {{ $module['group'] }}</td>
                                                     <td> 
                                                         @if (isset($module['sys_methods']))
@@ -63,3 +68,5 @@
         </div>
     </div>
 @endsection
+
+

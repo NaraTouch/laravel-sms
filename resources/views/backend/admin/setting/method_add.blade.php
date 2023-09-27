@@ -59,6 +59,17 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
+                                                        <h5>Position <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <input type="text" name="position" class="form-control"
+                                                                required="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
                                                         <h5>Description</h5>
                                                         <div class="controls">
                                                             <textarea id="description" 

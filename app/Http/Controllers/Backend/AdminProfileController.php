@@ -75,7 +75,7 @@ class AdminProfileController extends Controller
             $admin->updated_at = Carbon::now();
             $admin->save();
             Auth::logout();
-            return redirect()->route('admin_login');
+            return redirect()->route('admin.login');
         } else {
             return redirect()->back();
         }

@@ -38,7 +38,7 @@
                                                     </td>
                                                     <td> {{ $role->description }}</td>
                                                     <td>
-                                                        <a href="{{ route('edit.role', $role->id) }}"
+                                                        <a href="{{ route('role.edit', $role->id) }}"
                                                             class="btn btn-info">Edit</a>
                                                         @if (!$role->status)
                                                             <a href="{{ route('role.delete', $role->id) }}"

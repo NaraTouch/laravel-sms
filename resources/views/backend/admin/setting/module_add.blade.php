@@ -32,6 +32,17 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
+                                                        <h5>Prefix <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <input type="text" name="prefix" class="form-control"
+                                                                required="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
                                                         <h5>Group <span class="text-danger">*</span></h5>
                                                         <div class="controls">
                                                             <select name="group" id="group" required=""
@@ -42,6 +53,28 @@
                                                                 <option value="sys">Setting</option>
                                                                 <option value="repo">Report</option>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <h5>Position <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <input type="text" name="position" class="form-control"
+                                                                required="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <h5>Icon <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <input type="text" name="icon" class="form-control"
+                                                                required="">
                                                         </div>
                                                     </div>
                                                 </div>

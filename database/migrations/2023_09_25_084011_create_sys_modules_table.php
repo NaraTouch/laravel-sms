@@ -22,11 +22,18 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('group')->default('app')->comment('app=(none group), sys=(system setting group), repo=(report group)');
+            $table->tinyInteger('position')->default(1)->comment('sort');
+            $table->string('icon')->default(self::defaultIcon())->comment('Menu Icon');
+            $table->string('prefix')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });
     }
 
+    private static function defaultIcon()
+    {
+        return 'pie-chart';
+    }
     /**
      * Reverse the migrations.
      */

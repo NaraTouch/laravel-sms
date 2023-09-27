@@ -185,7 +185,7 @@ class AdminController extends Controller
     {
         Auth::guard("admin")->logout();
 		$request->session()->forget('_session');
-        return redirect()->route("admin_login")->with("alert", "Admin Logout successfully.");
+        return redirect()->route("admin.login")->with("alert", "Admin Logout successfully.");
     }
 
     // public function AdminRegisterStore(Request $request)
@@ -198,7 +198,7 @@ class AdminController extends Controller
     //         "created_at" => Carbon::now(),
     //     ]);
 
-    //     return redirect()->route("admin_login")->with("alert", "Admin Created Successfully");
+    //     return redirect()->route("admin.login")->with("alert", "Admin Created Successfully");
     // }
     // End Admin Login Controller
 
