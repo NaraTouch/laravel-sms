@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sys_methods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('module_id');
+            $table->foreignId('sys_module_id');
             $table->text('description')->nullable();
             $table->tinyInteger('is_menu')->default(1)->comment('0=hidden,1=show');
             $table->tinyInteger('position')->default(1)->comment('sort');

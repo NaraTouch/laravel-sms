@@ -2,6 +2,7 @@
     $prefix = Request::route()->getprefix();
     $route = Route::current()->getName();
     $menu = session('_session')['menu'];
+    // dump($menu);
 @endphp
 <aside class="main-sidebar">
     <section class="sidebar">
@@ -31,10 +32,10 @@
                     @php $repo = $repo+1; @endphp
                     <li class="header nav-small-cap">Report Interface</li>
                 @endif
-                @if (sizeof($item['sys_methods']) === 1)
-                    @if ($item['sys_methods'][0]['is_menu'] === 0)
+                @if (sizeof($item['methods']) === 1)
+                    @if ($item['methods'][0]['is_menu'] === 0)
                         <li class="{{ $route == $item['prefix'] ? 'active' : '' }}">
-                            <a href="{{ route($item['sys_methods'][0]['sys_name']) }}">
+                            <a href="{{ route($item['methods'][0]['sys_name']) }}">
                                 <i data-feather="{{$item['icon']}}"></i>
                                 <span>{{$item['name']}}</span>
                             </a>
@@ -50,7 +51,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @foreach ($item['sys_methods'] as $key => $method)
+                            @foreach ($item['methods'] as $key => $method)
                                 @if ($method['is_menu'] === 1)
                                     <li class="{{ $route == $method['sys_name'] ? 'active' : '' }}">
                                         <a href="{{ route($method['sys_name']) }}">

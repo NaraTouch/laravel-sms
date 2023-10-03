@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->tinyInteger('status')->default(1)->comment('0=hidden,1=show');
+            $table->tinyInteger('creator')->nullable()->comment('creator role');
+            $table->json('permissions')->nullable();
+            $table->string('permission_type', 50)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

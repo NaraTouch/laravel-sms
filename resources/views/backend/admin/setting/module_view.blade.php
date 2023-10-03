@@ -28,7 +28,7 @@
                                             @foreach ($allData as $key => $module)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td> {{ $module['sys_module_position'] }}.
+                                                    <td> {{ $module['position'] }}.
                                                         <span>
                                                             <i data-feather="{{$module['icon']}}"></i> 
                                                         </span>
@@ -36,8 +36,8 @@
                                                     </td>
                                                     <td> {{ $module['group'] }}</td>
                                                     <td> 
-                                                        @if (isset($module['sys_methods']))
-                                                            @foreach ($module['sys_methods'] as $k => $method)
+                                                        @if (isset($module['methods']))
+                                                            @foreach ($module['methods'] as $k => $method)
                                                                 @if ($k > 0)
                                                                     <br>
                                                                 @endif

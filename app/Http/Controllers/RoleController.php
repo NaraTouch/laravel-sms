@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SysRole;
+use App\Models\SysModule;
 use Carbon\Carbon;
 use DB;
 
@@ -89,8 +90,21 @@ class RoleController extends Controller
 
     public function RoleEdit($id)
     {
+        $role_id = Auth::guard("admin")->user()->role_id;
         $editData = SysRole::find($id);
-        $editData['permission'] = SysRole::RoleListById($id);
+        $permission_type = $editData->permission_type;
+        $permissions = $editData->permissions;
+        $creator = $editData->creator;
+        $editData['permission'] = [];
+        
+        if ($permission_type === 'all') {
+            $modules = SysModule::with('methods')->get();
+            dump(json_encode($modules));
+        } else {
+            
+        }
+        
+        // $editData['permission'] = SysRole::RoleListEdit($id, $role_id);
         return view('backend.admin.role.role_edit', compact("editData"));
     }
 

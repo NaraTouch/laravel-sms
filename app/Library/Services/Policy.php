@@ -3,6 +3,14 @@ namespace App\Library\Services;
   
 class Policy
 {
+
+    protected $adminOnly = [
+        'method.add',
+        'method.edit',
+        'module.add',
+        'module.edit'
+    ];
+
     public function Authorization($request)
     {
         $_session = $request->session()->get('_session');
@@ -14,6 +22,9 @@ class Policy
         $actionName = $route->getActionName();
         $routeName = $request->route()->getName();
         $isPost = $request->isMethod('POST');
+        if (!self::GetAdmin($request)) {
+            return false;
+        }
         if ($isPost) {
             if (strpos($routeName, "store") !== false) {
                 $routeName = str_replace("store.","",$routeName).'.add';
@@ -26,6 +37,15 @@ class Policy
             return true;
         }
         return false;
-      
+    }
+
+    public static function GetAdmin($request)
+    {
+        $routeName = $request->route()->getName();
+        $admin = $request->session()->get('_session')['admin'];
+        if (!$admin && in_array($routeName, $adminOnly)) {
+            return false;
+        }
+        return true;
     }
 }

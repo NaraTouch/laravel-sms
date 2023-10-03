@@ -1,43 +1,68 @@
 <?php
 namespace App\Library\Services;
 use App\Models\SysRole;
+use App\Models\SysModule;
   
 class Role
 {
-    public function AccessStore($user)
+    public function AccessStore($user = false)
     {
-        $roleListById = self::RoleListById($user->role_id);
-        $session_data = [
-            'name' => $user->name,
-            'role_id' => $user->role_id,
-            'profile_photo_path' => $user->profile_photo_path,
-            'menu' => $roleListById['menu'],
-            'permission' => $roleListById['permission']
-        ];
-        return $session_data;
+        $role = SysRole::find($user->role_id);
+        if (!isset($role)) {
+            return [
+                'menu' => [],
+                'admin' => false,
+                'permission' => []
+            ];
+        }
+        if ($role->permission_type === 'all') {
+            $modules = SysModule::select(['id','name', 'group', 'icon', 'prefix', 'position'])
+            ->with(['methods' => function ($query) {
+                $query
+                    ->select(['id', 'sys_module_id', 'name', 'sys_name', 'is_menu', 'position'])
+                    ->orderBy('position', 'asc');
+            }])
+            ->orderBy('position', 'asc')
+            ->get()
+            ->toArray();
+            $url = [];
+
+            return [
+                'menu' => $modules,
+                'admin' => true,
+                'permission' => self::Permission($modules)
+            ];
+        }
     }
 
-    private static function RoleListById($id)
+    public static function Permission($modules = [])
     {
-        $url = [];
-        $roleListById = SysRole::RoleListById($id, 'sort');
-        if ($roleListById) {
-            $roleListById = $roleListById->sortBy('group');
-            foreach ($roleListById as $key => $value) {
-                if ($value['is_checked'] !== 1 || !isset($value['sys_methods'])){ 
+        $permission = [];
+        if (!isset($modules)) {
+            return $permission;
+        }
+        foreach ($modules as $key => $module) {
+            if (!isset($module['methods'])) {
+                continue;
+            }
+            foreach ($module['methods'] as $index => $method) {
+                if (!isset($method['sys_name'])) {
                     continue;
                 }
-                foreach ($value['sys_methods'] as $k => $v) {
-                    if ($v['is_checked'] !== 1) {
-                        continue;
-                    }
-                    array_push($url, $v['sys_name']);
-                }
+               array_push($permission, $method['sys_name']);
             }
         }
-        return [
-            'menu' => $roleListById,
-            'permission' => $url
-        ];
+        return $permission;
     }
+
+    public static function GetMenu($request)
+    {
+        return $request->session()->get('_session')['menu'];
+    }
+
+    public static function GetPermission($request)
+    {
+        return $request->session()->get('_session')['permission'];
+    }
+
 }
