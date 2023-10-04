@@ -89,7 +89,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
-                                                @foreach ($allData as $module)
+                                                @foreach ($allData as $key => $module)
                                                     <fieldset class="col-3 px-3 py-3 mx-3 my-3">
                                                         <?php
                                                             $group = 'Application';
@@ -100,11 +100,11 @@
                                                         <legend>{{$group}}</legend>
                                                         <div class="col-8">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="{{$module['id']}}" name="module[{{$module['id']}}]" value="{{$module['id']}}">
+                                                                <input class="form-check-input" type="checkbox" id="{{$module['id']}}" name="permission[{{$module['id']}}]" value="{{$module['id']}}">
                                                                 <label class="form-check-label" for="{{$module['id']}}">{{$module['name']}}</label>
                                                                 <div class="form-check">
-                                                                    @foreach ($module['sys_methods'] as $method)
-                                                                    <input class="form-check-input" type="checkbox" id="{{$module['id']}}_{{$method['id']}}" name="method[{{$method['id']}}]" value="{{$method['id']}}">
+                                                                    @foreach ($module['methods'] as $method)
+                                                                    <input class="form-check-input" type="checkbox" id="{{$module['id']}}_{{$method['id']}}" name="permission[{{$module['id']}}][]" value="{{$method['id']}}">
                                                                     <label class="form-check-label" for="{{$module['id']}}_{{$method['id']}}">{{$method['name']}}</label>
                                                                     @endforeach
                                                                 </div>

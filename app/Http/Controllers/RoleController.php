@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SysRole;
 use App\Models\SysModule;
+use App\Library\Services\Role;
 use Carbon\Carbon;
 use DB;
 
@@ -19,34 +20,53 @@ class RoleController extends Controller
         return view("backend.admin.role.role_view", compact("allData"));
     }
 
-    public function RoleAdd()
+    public function RoleAdd(Request $request)
     {
-        $allData = SysRole::RoleList();
-        if ($allData) {
-            $allData = $allData->sortBy('group');
-        }
+        $allData = Role::GetMenu($request);
         return view('backend.admin.role.role_add', compact("allData"));
+    }
+
+    private static function PermissionData($role, $data)
+    {
+        $permissions = [];
+        foreach ($data as $module_id => $method) {
+            foreach ($role as $index => $value) {
+                if ($value['id'] != $module_id) {
+                    continue;
+                }
+                $module = $value;
+                unset($module['methods']);
+                $permissions[$index] = $module;
+                foreach ($method as $x => $method_id) {
+                    foreach ($value['methods'] as $k => $v) {
+                        if ($v['id'] != $method_id) {
+                            continue;
+                        }
+                        $permissions[$index]['methods'][$k] = $v;
+                    }
+                }
+            }
+        }
+        return $permissions;
     }
 
     public function RoleAddStore(Request $request)
     {
-        
-        $sysRole = SysRole::insertGetId([
+        $permissions = [];
+        $permission_type = 'custom';
+        $role = Role::GetMenu($request);
+        if (isset($request->permission)) {
+            $permissions = self::PermissionData($role, $request->permission);
+        }
+        SysRole::insertGetId([
             "name" => $request->name,
             "status" => $request->status,
+            "permission_type" => 'custom',
+            "permissions" => json_encode($permissions),
             "description" => $request->description,
             "created_at" => Carbon::now(),
             "updated_at" => Carbon::now(),
         ]);
-        $role_id = $sysRole;
-        $module = self::SysRoleModuleData($request->module, $role_id);
-        $method = self::SysRoleMethodData($request->method, $role_id);
-        if ($module) {
-            self::saveArray('sys_role_module', $module);
-        }
-        if ($method) {
-            self::saveArray('sys_role_method', $method);
-        }
         $notification = array(
 			'message' => 'Role Create Successfully',
 			'alert-type' => 'success'
