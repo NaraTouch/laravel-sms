@@ -113,14 +113,19 @@
                                                                     {{$module['name']}}
                                                                 </label>
                                                                 <div class="form-check">
-                                                                    @foreach ($module['sys_methods'] as $method)
+                                                                    @foreach ($module['methods'] as $method)
+                                                                    @php
+                                                                        $is_checked = false;
+                                                                        if (isset($method['is_checked']) && ($method['is_checked'] === true)) :  $is_checked = true;
+                                                                        endif;
+                                                                    @endphp
                                                                     <input 
                                                                         class="form-check-input" 
                                                                         type="checkbox" 
                                                                         id="{{$module['id']}}_{{$method['id']}}" 
                                                                         name="method[{{$method['id']}}]" 
                                                                         value="{{$method['id']}}" 
-                                                                        {{ $method['is_checked'] == '1' ? 'checked' : '' }}>
+                                                                        {{ $is_checked ? 'checked' : '' }}>
                                                                     <label 
                                                                         class="form-check-label {{ $method['is_menu'] == '1' ? 'text-primary' : '' }}" 
                                                                         for="{{$module['id']}}_{{$method['id']}}">

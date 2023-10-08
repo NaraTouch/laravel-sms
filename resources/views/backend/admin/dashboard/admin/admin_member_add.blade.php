@@ -8,7 +8,7 @@
             <section class="content">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h4 class="box-title">Add Employee </h4>
+                        <h4 class="box-title">Add Admin </h4>
                     </div>
                     <div class="box-body">
                         <div class="row">
@@ -140,6 +140,22 @@
                                                         <div class="controls">
                                                             <img id="showImage" src="{{ url('upload/no_image.jpg') }}"
                                                                 style="width: 100px; width: 100px; border: 1px solid #000000;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <h5>Role <span class="text-danger"> </span></h5>
+                                                        <div class="controls">
+                                                            <select name="role_id" id="role_id" required="" class="form-control">
+                                                                <option value="" selected="" disabled="">Select Role
+                                                                </option>
+                                                                @foreach ($Role as $role)
+                                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>

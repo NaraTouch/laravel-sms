@@ -8,15 +8,23 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SysRole;
 use App\Models\SysModule;
 use App\Library\Services\Role;
+use App\Library\Services\Policy;
 use Carbon\Carbon;
 use DB;
 
 class RoleController extends Controller
 {
     // Admin Login Controller
-    public function RoleView()
+
+    public function RoleView(Request $request)
     {
-        $allData = SysRole::all();
+        $allData = [];
+        $creator = Auth::guard("admin")->user()->id;
+        if (Policy::GetAdmin($request)) {
+            $allData = SysRole::all();
+        } else {
+            $allData = SysRole::all()->where('creator', $creator);
+        }
         return view("backend.admin.role.role_view", compact("allData"));
     }
 
@@ -58,10 +66,12 @@ class RoleController extends Controller
         if (isset($request->permission)) {
             $permissions = self::PermissionData($role, $request->permission);
         }
+        $creator = Auth::guard("admin")->user()->id;
         SysRole::insertGetId([
             "name" => $request->name,
             "status" => $request->status,
             "permission_type" => 'custom',
+            "creator" => $creator,
             "permissions" => json_encode($permissions),
             "description" => $request->description,
             "created_at" => Carbon::now(),
@@ -108,44 +118,96 @@ class RoleController extends Controller
         return $data;
     }
 
-    public function RoleEdit($id)
+    private static function PermissionEdit($menus = [], $permissions = [])
     {
-        $role_id = Auth::guard("admin")->user()->role_id;
-        $editData = SysRole::find($id);
-        $permission_type = $editData->permission_type;
-        $permissions = $editData->permissions;
-        $creator = $editData->creator;
-        $editData['permission'] = [];
-        
-        if ($permission_type === 'all') {
-            $modules = SysModule::with('methods')->get();
-            dump(json_encode($modules));
-        } else {
-            
+        $data = [];
+        foreach ($menus as $key => $menu) {
+            $_menu = $menu;
+            $_menu_checked = false;
+            if (isset($permissions)) {
+                unset($_menu['methods']);
+                $_methods = [];
+                foreach ($menu['methods'] as $met => $method) {
+                    $_method_checked = false;
+                    foreach ($permissions as $index => $permission) {
+                        if (isset($permission) && ($menu['id'] === $permission->id)) {
+                            $_menu_checked = true;
+                            if (!isset($permission->methods)) {
+                                continue;
+                            }
+                            foreach ($permission->methods as $pmet => $pmethod) {
+                                if (isset($pmethod) && ($method['id'] === $pmethod->id)) {
+                                    $_method_checked = true;
+                                }
+                            }
+                        }
+                    }
+                    $method['is_checked'] = $_method_checked;
+                    $_methods[] = $method;
+                }
+                $_menu['methods'] = $_methods;
+            }
+            $_menu['is_checked'] = $_menu_checked;
+            $data[$key] = $_menu;
         }
-        
-        // $editData['permission'] = SysRole::RoleListEdit($id, $role_id);
+        return $data;
+    }
+
+    public function RoleEdit(Request $request, $id)
+    {
+        $editData = SysRole::find($id);
+        $menu = Role::GetMenu($request);
+        $editData['permission'] = self::PermissionEdit($menu, json_decode($editData->permissions));
         return view('backend.admin.role.role_edit', compact("editData"));
+    }
+
+    private static function PermissionUpdate($menus, $request)
+    {
+        $data = [];
+        if (isset($request->module)) {
+            foreach ($request->module as $mod => $module_id) {
+                foreach ($menus as $key => $module) {
+                    $_menu = $module;
+                    unset($_menu['methods']);
+                    if ($module['id'] != $module_id) {
+                        continue;
+                    }
+                    if (isset($request->method)) {
+                        foreach ($request->method as $mot => $method_id) {
+                            foreach ($module['methods'] as $index => $method) {
+                                if ($method['id'] != $method_id) {
+                                    continue;
+                                }
+                                $_menu['methods'][$index] = $method;
+                            }
+                        }
+                    }
+                    $data[$key] = $_menu;
+                }
+            }
+        }
+        return $data;
     }
 
     public function RoleEditStore(Request $request, $id)
     {
+        $role_id = Auth::guard("admin")->user()->role_id;
+        // if ($role_id == $id) {
+        //     $notification = array(
+        //         'message' => 'You cannot update your own role.',
+        //         'alert-type' => 'error'
+        //     );
+        //     return redirect()->route('role.view')->with($notification);
+        // }
+        $menus = Role::GetMenu($request);
+        $permissions = self::PermissionUpdate($menus, $request);
         $role = SysRole::find($id);
         $role->name = $request->name;
         $role->status = $request->status;
+        $role->permissions = json_encode($permissions);
         $role->description = $request->description;
         $role->updated_at = Carbon::now();
         $role->save();
-        DB::table('sys_role_module')->where('role_id', $id)->delete();
-        DB::table('sys_role_method')->where('role_id', $id)->delete();
-        $module = self::SysRoleModuleData($request->module, $id);
-        $method = self::SysRoleMethodData($request->method, $id);
-        if ($module) {
-            self::saveArray('sys_role_module', $module);
-        }
-        if ($method) {
-            self::saveArray('sys_role_method', $method);
-        }
         $notification = array(
 			'message' => 'Role Create Successfully',
 			'alert-type' => 'success'

@@ -5,7 +5,7 @@ use App\Models\SysModule;
   
 class Role
 {
-    public function AccessStore($user = false)
+    public static function AccessStore($user = false)
     {
         $role = SysRole::find($user->role_id);
         if (!isset($role)) {

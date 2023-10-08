@@ -192,6 +192,15 @@
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
+                                                        <h5>Secret Code <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <input type="text" name="secret_code" class="form-control"
+                                                                value="{{ $editData->secret_code }}" required="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
                                                         <h5>Profile Image <span class="text-danger">*</span></h5>
                                                         <div class="controls">
                                                             <input type="file" name="image" class="form-control"
@@ -205,6 +214,24 @@
                                                             <img id="showImage"
                                                                 src="{{ !empty($editData->image) ? url('upload/employee_images/' . $editData->image) : url('upload/no_image.jpg') }}"
                                                                 style="width: 100px; width: 100px; border: 1px solid #000000;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <h5>Role <span class="text-danger"> </span></h5>
+                                                        <div class="controls">
+                                                            <select name="role_id" required="" class="form-control">
+                                                                <option value="" selected="" disabled="">Select
+                                                                    Role</option>
+                                                                @foreach ($editData->Role as $role)
+                                                                    <option value="{{ $role->id }}"
+                                                                        {{ $editData->role_id == $role->id ? 'selected' : '' }}>
+                                                                        {{ $role->name }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>

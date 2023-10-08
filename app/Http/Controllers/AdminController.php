@@ -7,23 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\Models\Admin;
+use App\Models\SysRole;
 use Illuminate\Support\Facades\Auth;
 use App\Library\Services\Role;
+use App\Library\Services\Policy;
 use DB;
 
 class AdminController extends Controller
 {
-	protected $Role;
-	/**
-     * Create a new controller instance.
-     *
-     * @param  \App\Providers\CredentialServiceProvider  $credentialServiceProvider
-     * @return void
-     */
-    public function __construct(Role $role)
-    {
-        $this->Role = $role;
-    }
     // Admin Login Controller
     public function AdminLogin()
     {
@@ -53,9 +44,13 @@ class AdminController extends Controller
 		return redirect()->route('admin.member.view')->with($notification);
 	}
 
-	public function AdminMemberAdd()
+	public function AdminMemberAdd(Request $request)
 	{
-		return view('backend.admin.dashboard.admin.admin_member_add', []);
+		$data['Role'] = [];
+		if (Policy::GetAdmin($request)) {
+			$data['Role'] = SysRole::all();
+		}
+		return view('backend.admin.dashboard.admin.admin_member_add', $data);
 	}
 
 	public function AdminMemberAddStore(Request $request)
@@ -85,6 +80,7 @@ class AdminController extends Controller
             "password" => Hash::make($request->password),
             "secret_code" => $request->secret_code,
             "created_at" => Carbon::now(),
+			"role_id" => $request->role_id,
         ]);
 
         $notification = array(
@@ -94,9 +90,12 @@ class AdminController extends Controller
 		return redirect()->route('admin.member.view')->with($notification);
     }
 
-    public function AdminMemberEdit($id)
+    public function AdminMemberEdit(Request $request, $id)
 	{
 		$data['editData'] = Admin::find($id);
+		if (Policy::GetAdmin($request)) {
+			$data['editData']['Role'] = SysRole::all();
+		}
 		// $data['designation'] = Designation::all();
 		return view('backend.admin.dashboard.admin.admin_member_edit', $data);
 	}
@@ -111,6 +110,7 @@ class AdminController extends Controller
 		$admin->address = $request->address;
 		$admin->gender = $request->gender;
 		$admin->religion = $request->religion;
+		$admin->role_id = $request->role_id;
 
 		$admin->designation_id = $request->designation_id;
 		$admin->dob = date('Y-m-d', strtotime($request->dob));
@@ -167,7 +167,7 @@ class AdminController extends Controller
 
         if (Auth::guard("admin")->attempt(["email" => $check["email"], "password" => $check["password"], "secret_code" => $check["secret_code"]])) {
 			$user = Auth::guard("admin")->user();
-			$role = $this->Role->AccessStore($user);
+			$role = Role::AccessStore($user);
 			$request->session()->put('_session', $role);
 			return redirect()->route("admin.dashboard")->with($notificationSuccess);
         } else {
