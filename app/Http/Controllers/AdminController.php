@@ -21,9 +21,18 @@ class AdminController extends Controller
         return view("backend.admin.auth.admin_login");
     }
 
-    public function AdminMemberView()
+    public function AdminMemberView(Request $request)
     {
-        $allData = Admin::all();
+
+		$allData = [];
+		$creator = Auth::guard("admin")->user()->id;
+		$query = DB::table('admins')
+			->select('admins.*', 'sys_roles.name as role_name')
+            ->leftJoin('sys_roles', 'admins.role_id', '=', 'sys_roles.id');
+		if (!Policy::IsAdmin($request)) {
+			$query->where('admins.creator', $creator);
+		}
+		$allData = $query->get();
         return view("backend.admin.dashboard.admin.admin_member_view", compact("allData"));
     }
 
@@ -46,10 +55,12 @@ class AdminController extends Controller
 
 	public function AdminMemberAdd(Request $request)
 	{
-		$data['Role'] = [];
-		if (Policy::GetAdmin($request)) {
-			$data['Role'] = SysRole::all();
+		$Role = SysRole::all();
+		$creator = Auth::guard("admin")->user()->id;
+		if (!Policy::IsAdmin($request)) {
+			$Role = $Role->where('creator', $creator);
 		}
+		$data['Role'] = $Role;
 		return view('backend.admin.dashboard.admin.admin_member_add', $data);
 	}
 
@@ -69,6 +80,7 @@ class AdminController extends Controller
 			);
 			return redirect()->route('admin.member.add')->with($notification);
 		}
+		$creator = Auth::guard("admin")->user()->id;
         Admin::insert([
             "name" => $request->name,
             "email" => $request->email,
@@ -81,6 +93,7 @@ class AdminController extends Controller
             "secret_code" => $request->secret_code,
             "created_at" => Carbon::now(),
 			"role_id" => $request->role_id,
+			"creator" => $creator,
         ]);
 
         $notification = array(
@@ -93,10 +106,12 @@ class AdminController extends Controller
     public function AdminMemberEdit(Request $request, $id)
 	{
 		$data['editData'] = Admin::find($id);
-		if (Policy::GetAdmin($request)) {
-			$data['editData']['Role'] = SysRole::all();
+		$Role = SysRole::all();
+		$creator = Auth::guard("admin")->user()->id;
+		if (!Policy::IsAdmin($request)) {
+			$Role = $Role->where('creator', $creator);
 		}
-		// $data['designation'] = Designation::all();
+		$data['editData']['Role'] = $Role;
 		return view('backend.admin.dashboard.admin.admin_member_edit', $data);
 	}
     

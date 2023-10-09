@@ -14,7 +14,8 @@
                         <div class="row">
                             <div class="col">
                                 <form method="post" action="{{ route('update.admin.member', $editData->id) }}"
-                                    enctype="multipart/form-data">
+                                    enctype="multipart/form-data"
+                                    autocomplete="off">
                                     @csrf
                                     <div class="row">
                                         <div class="col-12">
@@ -33,7 +34,7 @@
                                                         <h5>Email <span class="text-danger">*</span></h5>
                                                         <div class="controls">
                                                             <input type="text" name="email" class="form-control"
-                                                                required="">
+                                                            value="{{ $editData->email }}" required="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,20 +154,9 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <h5>Admin Email <span class="text-danger">*</span></h5>
-                                                        <div class="controls">
-                                                            <input type="email" name="email" class="form-control" required=""
-                                                                value="{{ $editData->email }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
                                                         <h5>Current password <span class="text-danger">*</span></h5>
                                                         <div class="controls">
-                                                            <input type="password" name="current_password" class="form-control">
+                                                            <input type="password" name="current_password" class="form-control" autocomplete="off" placeholder="Current password">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -176,7 +166,7 @@
                                                     <div class="form-group">
                                                         <h5>New password <span class="text-danger">*</span></h5>
                                                         <div class="controls">
-                                                            <input type="password" name="new_password" class="form-control">
+                                                            <input type="password" name="new_password" class="form-control" autocomplete="off" placeholder="New password">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -184,7 +174,7 @@
                                                     <div class="form-group">
                                                         <h5>Confirm password <span class="text-danger">*</span></h5>
                                                         <div class="controls">
-                                                            <input type="password" name="confirm_password" class="form-control">
+                                                            <input type="password" name="confirm_password" class="form-control" autocomplete="off" placeholder="Confirm New password">
                                                         </div>
                                                     </div>
                                                 </div>

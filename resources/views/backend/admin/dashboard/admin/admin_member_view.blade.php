@@ -22,7 +22,7 @@
                                                 {{-- <th>ID NO</th> --}}
                                                 <th>Mobile</th>
                                                 <th>Gender</th>
-                                                <th>Status</th>
+                                                <th>Role</th>
                                                 {{-- <th>Join Date</th>
                                                 <th>Salary</th> --}}
                                                 <th width="25%">Action</th>
@@ -32,17 +32,18 @@
                                             @foreach ($allData as $key => $admin)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td> {{ $admin->name }}</td>
-                                                    {{-- <td> {{ $admin->id_no }}</td> --}}
-                                                    <td> {{ $admin->mobile }}</td>
-                                                    <td> {{ $admin->gender }}</td>
-                                                    <td>
+                                                    <td> 
+                                                        {{ $admin->name }}
                                                         @if ($admin->status)
                                                             <span class="btn-xs btn-success disabled">Active</span>
                                                         @else
                                                             <span class="btn-xs btn-danger disabled">Disactive</span>
                                                         @endif
                                                     </td>
+                                                    {{-- <td> {{ $admin->id_no }}</td> --}}
+                                                    <td> {{ $admin->mobile }}</td>
+                                                    <td> {{ $admin->gender }}</td>
+                                                    <td>  {{ $admin->role_name }} </td>
                                                     {{-- <td> {{ $admin->join_date }}</td>
                                                     <td> {{ $admin->salary }}</td> --}}
                                                     <td>

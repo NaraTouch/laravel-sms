@@ -4,12 +4,15 @@ namespace App\Library\Services;
 class Policy
 {
 
-    protected $adminOnly = [
-        'method.add',
-        'method.edit',
-        'module.add',
-        'module.edit'
-    ];
+    public static function getAdminOnly()
+    {
+        return [
+            'method.add',
+            'method.edit',
+            'module.add',
+            'module.edit'
+        ];
+    }
 
     public function Authorization($request)
     {
@@ -22,7 +25,7 @@ class Policy
         $actionName = $route->getActionName();
         $routeName = $request->route()->getName();
         $isPost = $request->isMethod('POST');
-        if (!self::GetAdmin($request)) {
+        if (!self::OnlyAdmin($request)) {
             return false;
         }
         if ($isPost) {
@@ -39,13 +42,19 @@ class Policy
         return false;
     }
 
-    public static function GetAdmin($request)
+    public static function OnlyAdmin($request)
     {
         $routeName = $request->route()->getName();
         $admin = $request->session()->get('_session')['admin'];
-        if (!$admin && in_array($routeName, $adminOnly)) {
+        if (!$admin && in_array($routeName, self::getAdminOnly())) {
             return false;
         }
         return true;
+    }
+    
+    public static function IsAdmin($request)
+    {
+        $_session = $request->session()->get('_session');
+        return $_session['admin'];
     }
 }

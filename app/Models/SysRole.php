@@ -9,5 +9,4 @@ use DB;
 class SysRole extends Model
 {
     use HasFactory;
-
 }

@@ -15,8 +15,15 @@ class Role
                 'permission' => []
             ];
         }
-        if ($role->permission_type === 'all') {
-            $modules = SysModule::select(['id','name', 'group', 'icon', 'prefix', 'position'])
+        if ($role->permission_type !== 'all') {
+            $permissions = json_decode($role->permissions, true);
+            return [
+                'menu' => $permissions,
+                'admin' => false,
+                'permission' => self::Permission($permissions)
+            ];
+        }
+        $modules = SysModule::select(['id','name', 'group', 'icon', 'prefix', 'position'])
             ->with(['methods' => function ($query) {
                 $query
                     ->select(['id', 'sys_module_id', 'name', 'sys_name', 'is_menu', 'position'])
@@ -27,12 +34,11 @@ class Role
             ->toArray();
             $url = [];
 
-            return [
-                'menu' => $modules,
-                'admin' => true,
-                'permission' => self::Permission($modules)
-            ];
-        }
+        return [
+            'menu' => $modules,
+            'admin' => true,
+            'permission' => self::Permission($modules)
+        ];
     }
 
     public static function Permission($modules = [])

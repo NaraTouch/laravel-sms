@@ -20,7 +20,7 @@ class RoleController extends Controller
     {
         $allData = [];
         $creator = Auth::guard("admin")->user()->id;
-        if (Policy::GetAdmin($request)) {
+        if (Policy::IsAdmin($request)) {
             $allData = SysRole::all();
         } else {
             $allData = SysRole::all()->where('creator', $creator);
@@ -192,13 +192,13 @@ class RoleController extends Controller
     public function RoleEditStore(Request $request, $id)
     {
         $role_id = Auth::guard("admin")->user()->role_id;
-        // if ($role_id == $id) {
-        //     $notification = array(
-        //         'message' => 'You cannot update your own role.',
-        //         'alert-type' => 'error'
-        //     );
-        //     return redirect()->route('role.view')->with($notification);
-        // }
+        if ($role_id == $id) {
+            $notification = array(
+                'message' => 'You cannot update your own role.',
+                'alert-type' => 'error'
+            );
+            return redirect()->route('role.view')->with($notification);
+        }
         $menus = Role::GetMenu($request);
         $permissions = self::PermissionUpdate($menus, $request);
         $role = SysRole::find($id);
