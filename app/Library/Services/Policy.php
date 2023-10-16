@@ -23,7 +23,7 @@ class Policy
         }
         $route = $request->route();
         $actionName = $route->getActionName();
-        $routeName = $request->route()->getName();
+        $routeName = $route->getName();
         $isPost = $request->isMethod('POST');
         if (!self::OnlyAdmin($request)) {
             return false;
