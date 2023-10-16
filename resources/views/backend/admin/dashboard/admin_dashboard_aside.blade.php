@@ -2,7 +2,6 @@
     $prefix = Request::route()->getprefix();
     $route = Route::current()->getName();
     $menu = session('_session')['menu'];
-    // dump($menu);
 @endphp
 <aside class="main-sidebar">
     <section class="sidebar">
