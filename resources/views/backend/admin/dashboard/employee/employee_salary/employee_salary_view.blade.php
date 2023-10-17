@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Employee Salary List</h3>
-                                <a href="{{ route('employee.registration.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Employee Salary</a>
+                                @feature(employee.registration.add
+                                @<a href="{{ route('employee.registration.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Employee Salary</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -38,12 +39,15 @@
                                                     <td> {{ date('d-m-Y', strtotime($value->join_date)) }}</td>
                                                     <td> {{ $value->salary }}</td>
                                                     <td>
-                                                        <a title="Increment"
+                                                        @feature(employee.salary.increment
+                                                        @<a title="Increment"
                                                             href="{{ route('employee.salary.increment', $value->id) }}"
-                                                            class="btn btn-info"> <i class="fa fa-plus-circle"></i></a>
-                                                        <a title="Details" target="_blank"
+                                                            class="btn btn-info"> <i class="fa fa-plus-circle"></i></a>)
+
+                                                        @feature(employee.salary.details
+                                                        @<a title="Details" target="_blank"
                                                             href="{{ route('employee.salary.details', $value->id) }}"
-                                                            class="btn btn-danger"><i class="fa fa-eye"></i></a>
+                                                            class="btn btn-danger"><i class="fa fa-eye"></i></a>)
                                                     </td>
 
                                                 </tr>

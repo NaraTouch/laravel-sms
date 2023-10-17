@@ -36,8 +36,9 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('method.edit', $method->id) }}"
-                                                            class="btn btn-info">Edit</a>
+                                                        @feature(method.edit
+                                                        @<a href="{{ route('method.edit', $method->id) }}"
+                                                            class="btn btn-info">Edit</a>)
                                                     </td>
                                                 </tr>
                                             @endforeach

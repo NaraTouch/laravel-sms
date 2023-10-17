@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Employee Salary List </h3>
-                                <a href="{{ route('account.salary.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add / Edit Employee Salary</a>
+                                @feature(account.salary.add
+                                @<a href="{{ route('account.salary.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add / Edit Employee Salary</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">

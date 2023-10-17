@@ -10,8 +10,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title"> Assign Subject Details</h3>
-                                <a href="{{ route('assign.subject.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Assign Subject</a>
+                                @feature(assign.subject.add
+                                @<a href="{{ route('assign.subject.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Assign Subject</a>)
                             </div>
                             <div class="box-body">
                                 <h4><strong>Assign Subject : </strong>{{ $detailsData['0']['student_class']['name'] }} </h4>

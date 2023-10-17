@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Student Fee List </h3>
-                                <a href="{{ route('student.fee.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add / Edit Student Fee</a>
+                                @feature(student.fee.add
+                                @<a href="{{ route('student.fee.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add / Edit Student Fee</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">

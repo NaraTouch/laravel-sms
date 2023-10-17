@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Module List</h3>
-                                <a href="{{ route('module.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Module</a>
+                                @feature(module.add
+                                @<a href="{{ route('module.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Module</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -46,12 +47,17 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('module.edit', $module['id']) }}"
-                                                            class="btn btn-info">Edit</a>
-                                                        <a href="{{ route('method.add', $module['id']) }}"
-                                                            class="btn btn-info">Add Method</a>
-                                                        <a href="{{ route('method.view', $module['id']) }}"
-                                                            class="btn btn-success">View Method</a>
+                                                        @feature(module.edit
+                                                        @<a href="{{ route('module.edit', $module['id']) }}"
+                                                            class="btn btn-info">Edit</a>)
+
+                                                        @feature(method.add
+                                                        @<a href="{{ route('method.add', $module['id']) }}"
+                                                            class="btn btn-info">Add Method</a>)
+
+                                                        @feature(method.view
+                                                        @<a href="{{ route('method.view', $module['id']) }}"
+                                                            class="btn btn-success">View Method</a>)
                                                     </td>
                                                 </tr>
                                             @endforeach

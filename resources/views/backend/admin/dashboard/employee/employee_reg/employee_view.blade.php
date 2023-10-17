@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Employee List</h3>
-                                <a href="{{ route('employee.registration.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Employee</a>
+                                @feature(employee.registration.add
+                                @<a href="{{ route('employee.registration.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Employee</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -38,11 +39,14 @@
                                                     <td> {{ $employee->join_date }}</td>
                                                     <td> {{ $employee->salary }}</td>
                                                     <td>
-                                                        <a href="{{ route('employee.registration.edit', $employee->id) }}"
-                                                            class="btn btn-info">Edit</a>
-                                                        <a target="_blank"
+                                                        @feature(employee.registration.edit
+                                                        @<a href="{{ route('employee.registration.edit', $employee->id) }}"
+                                                            class="btn btn-info">Edit</a>)
+
+                                                        @feature(employee.registration.details
+                                                        @<a target="_blank"
                                                             href="{{ route('employee.registration.details', $employee->id) }}"
-                                                            class="btn btn-danger">Details</a>
+                                                            class="btn btn-danger">Details</a>)
                                                     </td>
                                                 </tr>
                                             @endforeach

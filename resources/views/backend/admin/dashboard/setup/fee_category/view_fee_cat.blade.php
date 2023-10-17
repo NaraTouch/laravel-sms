@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Student Fee Category List</h3>
-                                <a href="{{ route('fee.category.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Fee Category</a>
+                                @feature(fee.category.add
+                                @<a href="{{ route('fee.category.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Fee Category</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -28,10 +29,13 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td> {{ $fee->name }}</td>
                                                     <td>
-                                                        <a href="{{ route('fee.category.edit', $fee->id) }}"
-                                                            class="btn btn-info">Edit</a>
-                                                        <a href="{{ route('fee.category.delete', $fee->id) }}"
-                                                            class="btn btn-danger" id="delete">Delete</a>
+                                                        @feature(fee.category.edit
+                                                        @<a href="{{ route('fee.category.edit', $fee->id) }}"
+                                                            class="btn btn-info">Edit</a>)
+
+                                                        @feature(fee.category.delete
+                                                        @<a href="{{ route('fee.category.delete', $fee->id) }}"
+                                                            class="btn btn-danger" id="delete">Delete</a>)
                                                     </td>
                                                 </tr>
                                             @endforeach

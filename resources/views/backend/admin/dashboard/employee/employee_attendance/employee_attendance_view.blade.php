@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Employee Attendance List </h3>
-                                <a href="{{ route('employee.attendance.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Attendance </a>
+                                @feature(employee.attendance.add
+                                @<a href="{{ route('employee.attendance.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Attendance </a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -28,10 +29,13 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td> {{ date('d-m-Y', strtotime($value->date)) }}</td>
                                                     <td>
-                                                        <a href="{{ route('employee.attendance.edit', $value->date) }}"
-                                                            class="btn btn-info">Edit</a>
-                                                        <a href="{{ route('employee.attendance.details', $value->date) }}"
-                                                            class="btn btn-danger">Details</a>
+                                                        @feature(employee.attendance.edit
+                                                        @<a href="{{ route('employee.attendance.edit', $value->date) }}"
+                                                            class="btn btn-info">Edit</a>)
+
+                                                        @feature(employee.attendance.details
+                                                        @<a href="{{ route('employee.attendance.details', $value->date) }}"
+                                                            class="btn btn-danger">Details</a>)
                                                     </td>
                                                 </tr>
                                             @endforeach

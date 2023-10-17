@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Exam Type List</h3>
-                                <a href="{{ route('exam.type.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Exam Type</a>
+                                @feature(exam.type.add
+                                @<a href="{{ route('exam.type.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Exam Type</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -28,10 +29,13 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td> {{ $exam->name }}</td>
                                                     <td>
-                                                        <a href="{{ route('exam.type.edit', $exam->id) }}"
-                                                            class="btn btn-info">Edit</a>
-                                                        <a href="{{ route('exam.type.delete', $exam->id) }}"
-                                                            class="btn btn-danger" id="delete">Delete</a>
+                                                        @feature(exam.type.edit
+                                                        @<a href="{{ route('exam.type.edit', $exam->id) }}"
+                                                            class="btn btn-info">Edit</a>)
+
+                                                        @feature(exam.type.delete
+                                                        @<a href="{{ route('exam.type.delete', $exam->id) }}"
+                                                            class="btn btn-danger" id="delete">Delete</a>)
                                                     </td>
                                                 </tr>
                                             @endforeach

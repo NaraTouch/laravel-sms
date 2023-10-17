@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Employee Leave </h3>
-                                <a href="{{ route('employee.leave.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Employee Leave</a>
+                                @feature(employee.leave.add
+                                @<a href="{{ route('employee.leave.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Employee Leave</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -36,10 +37,12 @@
                                                     <td> {{ $leave->start_date }}</td>
                                                     <td> {{ $leave->end_date }}</td>
                                                     <td>
-                                                        <a href="{{ route('employee.leave.edit', $leave->id) }}"
-                                                            class="btn btn-info">Edit</a>
-                                                        <a href="{{ route('employee.leave.delete', $leave->id) }}"
-                                                            class="btn btn-danger" id="delete">Delete</a>
+                                                        @feature(employee.leave.edit
+                                                        @<a href="{{ route('employee.leave.edit', $leave->id) }}"
+                                                            class="btn btn-info">Edit</a>)
+                                                        @feature(employee.leave.delete
+                                                        @<a href="{{ route('employee.leave.delete', $leave->id) }}"
+                                                            class="btn btn-danger" id="delete">Delete</a>)
                                                     </td>
                                                 </tr>
                                             @endforeach

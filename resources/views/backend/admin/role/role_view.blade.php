@@ -9,7 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Role List</h3>
-                                @feature(role.add@<a href="{{ route('role.add') }}" style="float: right;" class="btn btn-rounded btn-success mb-5"> Add Role</a>)
+                                @feature(role.add
+                                @<a href="{{ route('role.add') }}" style="float: right;" 
+                                    class="btn btn-rounded btn-success mb-5"> Add Role</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -37,11 +39,19 @@
                                                     </td>
                                                     <td> {{ $role->description }}</td>
                                                     <td>
-                                                        @feature(role.edit@<a href="{{ route('role.edit', $role->id) }}" class="btn btn-info">Edit</a>)
+                                                        @feature(role.edit
+                                                        @<a href="{{ route('role.edit', $role->id) }}" 
+                                                            class="btn btn-info">Edit</a>)
+
                                                         @if (!$role->status)
-                                                        @feature(role.delete@<a href="{{ route('role.delete', $role->id) }}" class="btn btn-success">Enable</a>)
+                                                        @feature(role.delete
+                                                        @<a href="{{ route('role.delete', $role->id) }}" 
+                                                            class="btn btn-success">Enable</a>)
+                                                        
                                                         @else
-                                                        @feature(role.delete@<a href="{{ route('role.delete', $role->id) }}" class="btn btn-danger">Disabled</a>)
+                                                        @feature(role.delete
+                                                        @<a href="{{ route('role.delete', $role->id) }}" 
+                                                            class="btn btn-danger">Disabled</a>)
                                                         @endif
                                                         
                                                     </td>

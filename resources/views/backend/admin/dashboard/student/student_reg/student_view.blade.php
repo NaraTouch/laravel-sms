@@ -66,8 +66,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Student List</h3>
-                                <a href="{{ route('student.registration.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Student </a>
+                                @feature(student.registration.add
+                                @<a href="{{ route('student.registration.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Student </a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -97,17 +98,20 @@
                                                                 style="width: 60px; width: 60px;">
                                                         </td>
                                                         <td>
-                                                            <a title="Edit"
+                                                            @feature(student.registration.edit
+                                                            @<a title="Edit"
                                                                 href="{{ route('student.registration.edit', $value->student_id) }}"
-                                                                class="btn btn-info"> <i class="fa fa-edit"></i> </a>
+                                                                class="btn btn-info"> <i class="fa fa-edit"></i> </a>)
 
-                                                            <a title="Promotion"
+                                                            @feature(student.registration.promotion
+                                                            @<a title="Promotion"
                                                                 href="{{ route('student.registration.promotion', $value->student_id) }}"
-                                                                class="btn btn-primary"><i class="fa fa-check"></i></a>
+                                                                class="btn btn-primary"><i class="fa fa-check"></i></a>)
 
-                                                            <a target="_blank" title="Details"
+                                                            @feature(student.registration.details
+                                                            @<a target="_blank" title="Details"
                                                                 href="{{ route('student.registration.details', $value->student_id) }}"
-                                                                class="btn btn-danger"><i class="fa fa-eye"></i></a>
+                                                                class="btn btn-danger"><i class="fa fa-eye"></i></a>)
                                                         </td>
                                                     </tr>
                                                 @endforeach

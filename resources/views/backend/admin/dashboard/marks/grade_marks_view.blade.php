@@ -10,8 +10,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Grade Marks List </h3>
-                                <a href="{{ route('marks.grade.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Grade Marks</a>
+                                @feature(marks.grade.add
+                                @<a href="{{ route('marks.grade.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Grade Marks</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -39,8 +40,9 @@
                                                     <td> {{ $value->start_point }} - {{ $value->end_point }}</td>
                                                     <td> {{ $value->remarks }}</td>
                                                     <td>
-                                                        <a href="{{ route('marks.grade.edit', $value->id) }}"
-                                                            class="btn btn-info">Edit</a>
+                                                        @feature(marks.grade.edit
+                                                        @<a href="{{ route('marks.grade.edit', $value->id) }}"
+                                                            class="btn btn-info">Edit</a>)
                                                     </td>
                                                 </tr>
                                             @endforeach

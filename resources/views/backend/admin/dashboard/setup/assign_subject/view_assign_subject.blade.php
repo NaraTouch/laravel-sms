@@ -11,8 +11,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Assign Subject List</h3>
-                                <a href="{{ route('assign.subject.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Assign Subject</a>
+                                @feature(assign.subject.add
+                                @<a href="{{ route('assign.subject.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Assign Subject</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -30,10 +31,13 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td> {{ $assign['student_class']['name'] }}</td>
                                                     <td>
-                                                        <a href="{{ route('assign.subject.edit', $assign->class_id) }}"
-                                                            class="btn btn-info">Edit</a>
-                                                        <a href="{{ route('assign.subject.details', $assign->class_id) }}"
-                                                            class="btn btn-primary">Details</a>
+                                                        @feature(assign.subject.edit
+                                                        @<a href="{{ route('assign.subject.edit', $assign->class_id) }}"
+                                                            class="btn btn-info">Edit</a>)
+
+                                                        @feature(assign.subject.details
+                                                        @<a href="{{ route('assign.subject.details', $assign->class_id) }}"
+                                                            class="btn btn-primary">Details</a>)
 
                                                     </td>
                                                 </tr>

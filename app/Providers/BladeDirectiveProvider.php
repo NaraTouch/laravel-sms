@@ -22,6 +22,7 @@ class BladeDirectiveProvider extends ServiceProvider
         Blade::directive('feature', function ($expression) {
             $session = session('_session')['permission'];
             list($routeName, $element) = explode('@', $expression);
+            $routeName = preg_replace('/\s+/', '', $routeName);
             if (in_array($routeName, $session)) {
                 return $element;
             }

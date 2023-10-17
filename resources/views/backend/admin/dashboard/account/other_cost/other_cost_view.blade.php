@@ -9,8 +9,9 @@
                         <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Other Cost List </h3>
-                                <a href="{{ route('other.cost.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Other Cost</a>
+                                @feature(other.cost.add
+                                @<a href="{{ route('other.cost.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Add Other Cost</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
