@@ -123,6 +123,6 @@ class SettingController extends Controller
 			'message' => 'Module Create Updated Successfully',
 			'alert-type' => 'success'
 		);
-		return redirect()->route('method.view', ['id' => $sysMethod->module_id])->with($notification);
+		return redirect()->route('method.view', ['id' => $sysMethod->sys_module_id])->with($notification);
     }
 }

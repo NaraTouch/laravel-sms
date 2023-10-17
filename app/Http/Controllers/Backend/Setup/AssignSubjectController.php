@@ -25,6 +25,7 @@ class AssignSubjectController extends Controller
 
 	public function StoreAssignSubject(Request $request)
 	{
+		dump($request);die();
 		$subjectCount = count($request->subject_id);
 		if ($subjectCount != NULL) {
 			for ($i = 0; $i < $subjectCount; $i++) {
@@ -34,7 +35,8 @@ class AssignSubjectController extends Controller
 				$assign_subject->full_mark = $request->full_mark[$i];
 				$assign_subject->pass_mark = $request->pass_mark[$i];
 				$assign_subject->subjective_mark = $request->subjective_mark[$i];
-				$assign_subject->save();
+				
+				// $assign_subject->save();
 			}
 		}
 		$notification = array(
