@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\SchoolSubject;
 use App\Models\StudentClass;
 use App\Models\AssignSubject;
+use Illuminate\Support\Facades\Validator;
 
 class AssignSubjectController extends Controller
 {
@@ -23,9 +24,75 @@ class AssignSubjectController extends Controller
 		return view('backend.admin.dashboard.setup.assign_subject.add_assign_subject', $data);
 	}
 
+	private function ValidateAssignSubject($request)
+    {
+        $validator = Validator::make($request->all(),
+            [
+                'class_id' => 'required|integer',
+                'subject_id' => 'required|array',
+                'full_mark' => [
+                    'required',
+                    'array',
+                    function ($attribute, $array, $fail) use ($request){
+						foreach ($array as $index => $value) {
+							if (!is_numeric($value)) {
+								$fail('Invalid value.');
+								break;
+							}
+						}
+                    }
+                ],
+                'pass_mark' => [
+                    'required',
+                    'array',
+                    function ($attribute, $array, $fail) use ($request){
+						foreach ($array as $index => $value) {
+							if (!is_numeric($value)) {
+								$fail('Invalid value.');
+								break;
+							}
+						}
+                    }
+                ],
+				'subjective_mark' => [
+                    'required',
+                    'array',
+                    function ($attribute, $array, $fail) use ($request){
+						foreach ($array as $index => $value) {
+							if (!is_numeric($value)) {
+								$fail('Invalid value.');
+								break;
+							}
+							if ($value > $request['full_mark'][$index]) {
+								$fail('Subjective mark must lower than full mark.');
+								break;
+							}
+						}
+                    }
+                ],
+            ],
+            [
+                'class_id.required' => 'Required',
+                'subject_id.required' => 'Required',
+                'full_mark.required' => 'Required',
+                'pass_mark.required' => 'Required',
+                'subjective_mark.required' => 'Required',
+            ]
+        );
+        return $validator;
+    }
+
 	public function StoreAssignSubject(Request $request)
 	{
-		dump($request);die();
+		$validator = $this->ValidateAssignSubject($request);
+        if ($validator->fails()) {
+			$error = $validator->errors()->first();
+			$notification = array(
+				'message' => $error,
+				'alert-type' => 'error'
+			);
+			return redirect()->route('assign.subject.view')->with($notification);
+		}
 		$subjectCount = count($request->subject_id);
 		if ($subjectCount != NULL) {
 			for ($i = 0; $i < $subjectCount; $i++) {
@@ -35,8 +102,7 @@ class AssignSubjectController extends Controller
 				$assign_subject->full_mark = $request->full_mark[$i];
 				$assign_subject->pass_mark = $request->pass_mark[$i];
 				$assign_subject->subjective_mark = $request->subjective_mark[$i];
-				
-				// $assign_subject->save();
+				$assign_subject->save();
 			}
 		}
 		$notification = array(
