@@ -58,14 +58,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    {{-- <div class="col-md-3">
                                         <div class="form-group">
                                             <h5> Date <span class="text-danger">*</span></h5>
                                             <div class="controls">
                                                 <input type="date" name="date" id="date" class="form-control">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
+                                </div>
+                                <div class="row">
                                     <div class="col-md-3">
                                         <a id="search" class="btn btn-primary" name="search"> Search</a>
                                     </div>
@@ -74,7 +76,7 @@
                                     <div class="col-md-12">
                                         <div id="DocumentResults">
                                             <script id="document-template" type="text/x-handlebars-template">
-                                                <form action="{{ route('account.fee.store') }}" method="post" >
+                                                <form action="{{ route('store.account.fee') }}" method="post" >
                                                     @csrf
                                                     <table class="table table-bordered table-striped" style="width: 100%">
                                                         <thead>
@@ -109,7 +111,7 @@
             var year_id = $('#year_id').val();
             var class_id = $('#class_id').val();
             var fee_category_id = $('#fee_category_id').val();
-            var date = $('#date').val();
+            // var date = $('#date').val();
             $.ajax({
                 url: "{{ route('account.fee.getstudent') }}",
                 type: "get",
@@ -117,7 +119,7 @@
                     'year_id': year_id,
                     'class_id': class_id,
                     'fee_category_id': fee_category_id,
-                    'date': date
+                    // 'date': date
                 },
                 beforeSend: function() {},
                 success: function(data) {

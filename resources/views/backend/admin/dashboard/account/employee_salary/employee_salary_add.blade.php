@@ -32,7 +32,7 @@
                                     <div class="col-md-12">
                                         <div id="DocumentResults">
                                             <script id="document-template" type="text/x-handlebars-template">
-                                                <form action="{{ route('account.salary.store') }}" method="post" >
+                                                <form action="{{ route('store.account.salary') }}" method="post" >
                                                     @csrf
                                                     <table class="table table-bordered table-striped" style="width: 100%">
                                                         <thead>

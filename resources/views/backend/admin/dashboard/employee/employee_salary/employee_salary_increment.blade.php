@@ -11,7 +11,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col">
-                                <form method="post" action="{{ route('update.increment.store', $editData->id) }}">
+                                <form method="post" action="{{ route('store.employee.salary.increment', $editData->id) }}">
                                     @csrf
                                     <div class="row">
                                         <div class="col-12">

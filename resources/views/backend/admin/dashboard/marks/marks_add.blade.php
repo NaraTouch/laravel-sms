@@ -13,7 +13,7 @@
                                 <h4 class="box-title">Student <strong>Marsk Entry</strong></h4>
                             </div>
                             <div class="box-body">
-                                <form method="post" action="{{ route('marks.entry.store') }}">
+                                <form method="post" action="{{ route('store.marks.entry') }}">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-3">

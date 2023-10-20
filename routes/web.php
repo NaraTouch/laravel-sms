@@ -40,6 +40,7 @@ use App\Http\Controllers\Backend\DefaultController;
 use App\Http\Controllers\Backend\Account\StudentFeeController;
 use App\Http\Controllers\Backend\Account\AccountSalaryController;
 use App\Http\Controllers\Backend\Account\OtherCostController;
+use App\Http\Controllers\Backend\Academy\AcademicController;
 
 use App\Http\Controllers\Backend\Report\ProfitController;
 use App\Http\Controllers\Backend\Report\MarkSheetController;
@@ -227,6 +228,16 @@ Route::prefix('admin')->group(function () {
         Route::get('designation/delete/{id}', [DesignationController::class, 'DesignationDelete'])->name('designation.delete');
     });
 
+    // Academic Routes 
+    Route::middleware(['admin'])->prefix('academic')->group(function () {
+
+        Route::get('academic/view', [AcademicController::class, 'AcademicView'])->name('academic.view');
+        Route::get('academic/add', [AcademicController::class, 'AcademicAdd'])->name('academic.add');
+        Route::post('academic/store', [AcademicController::class, 'AcademicStore'])->name('store.academic');
+        Route::get('academic/edit/{id}', [AcademicController::class, 'AcademicEdit'])->name('academic.edit');
+        Route::post('academic/update/{id}', [AcademicController::class, 'AcademicUpdate'])->name('update.academic');
+        Route::get('academic/delete/{id}', [AcademicController::class, 'AcademicDelete'])->name('academic.delete');
+    });
 
     Route::middleware(['admin'])->prefix('students')->group(function () {
         // Student Registration Routes 
@@ -270,7 +281,7 @@ Route::prefix('admin')->group(function () {
         // Employee Salary All Routes 
         Route::get('salary/employee/view', [EmployeeSalaryController::class, 'SalaryView'])->name('employee.salary.view');
         Route::get('salary/employee/increment/{id}', [EmployeeSalaryController::class, 'SalaryIncrement'])->name('employee.salary.increment');
-        Route::post('salary/employee/store/{id}', [EmployeeSalaryController::class, 'SalaryStore'])->name('update.increment.store');
+        Route::post('salary/employee/store/{id}', [EmployeeSalaryController::class, 'SalaryStore'])->name('store.employee.salary.increment');
         Route::get('salary/employee/details/{id}', [EmployeeSalaryController::class, 'SalaryDetails'])->name('employee.salary.details');
 
         // Employee Leave All Routes 
@@ -305,7 +316,7 @@ Route::prefix('admin')->group(function () {
         Route::get('student/marks/getstudents', [DefaultController::class, 'GetStudents'])->name('student.marks.getstudents');
         // Marks Management Routes
         Route::get('marks/entry/add', [MarksController::class, 'MarksAdd'])->name('marks.entry.add');
-        Route::post('marks/entry/store', [MarksController::class, 'MarksStore'])->name('marks.entry.store');
+        Route::post('marks/entry/store', [MarksController::class, 'MarksStore'])->name('store.marks.entry');
         Route::get('marks/entry/edit', [MarksController::class, 'MarksEdit'])->name('marks.entry.edit');
         Route::get('marks/getstudents/edit', [MarksController::class, 'MarksEditGetStudents'])->name('student.edit.getstudents');
         Route::post('marks/entry/update', [MarksController::class, 'MarksUpdate'])->name('marks.entry.update');
@@ -324,13 +335,13 @@ Route::prefix('admin')->group(function () {
         Route::get('student/fee/view', [StudentFeeController::class, 'StudentFeeView'])->name('student.fee.view');
         Route::get('student/fee/add', [StudentFeeController::class, 'StudentFeeAdd'])->name('student.fee.add');
         Route::get('student/fee/getstudent', [StudentFeeController::class, 'StudentFeeGetStudent'])->name('account.fee.getstudent');
-        Route::post('student/fee/store', [StudentFeeController::class, 'StudentFeeStore'])->name('account.fee.store');
+        Route::post('student/fee/store', [StudentFeeController::class, 'StudentFeeStore'])->name('store.account.fee');
 
         // Employee Salary Routes
         Route::get('account/salary/view', [AccountSalaryController::class, 'AccountSalaryView'])->name('account.salary.view');
         Route::get('account/salary/add', [AccountSalaryController::class, 'AccountSalaryAdd'])->name('account.salary.add');
         Route::get('account/salary/getemployee', [AccountSalaryController::class, 'AccountSalaryGetEmployee'])->name('account.salary.getemployee');
-        Route::post('account/salary/store', [AccountSalaryController::class, 'AccountSalaryStore'])->name('account.salary.store');
+        Route::post('account/salary/store', [AccountSalaryController::class, 'AccountSalaryStore'])->name('store.account.salary');
 
         // Other Cost Rotues 
         Route::get('other/cost/view', [OtherCostController::class, 'OtherCostView'])->name('other.cost.view');

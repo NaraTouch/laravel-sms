@@ -10,12 +10,12 @@ use App\Models\StudentYear;
 use App\Models\StudentClass;
 use App\Models\AccountStudentFee;
 use App\Models\FeeCategory;
+use Illuminate\Support\Facades\Validator;
 
 class StudentFeeController extends Controller
 {
 	public function StudentFeeView()
 	{
-
 		$data['allData'] = AccountStudentFee::all();
 		return view('backend.admin.dashboard.account.student_fee.student_fee_view', $data);
 	}
@@ -28,15 +28,31 @@ class StudentFeeController extends Controller
 		return view('backend.admin.dashboard.account.student_fee.student_fee_add', $data);
 	}
 
+	private function ValidateStudentFeeGetStudent($request)
+    {
+        $validator = Validator::make($request->all(),
+            [
+                'year_id' => 'required|string',
+                'class_id' => 'required|string',
+                'fee_category_id' => 'required|string',
+            ],
+            [
+                'year_id.required' => 'Required',
+                'class_id.required' => 'Required',
+                'fee_category_id.required' => 'Required',
+            ]
+        );
+        return $validator;
+    }
+
 	public function StudentFeeGetStudent(Request $request)
 	{
 
 		$year_id = $request->year_id;
 		$class_id = $request->class_id;
 		$fee_category_id = $request->fee_category_id;
-		$date = date('Y-m', strtotime($request->date));
-
-		$data = AssignStudent::with(['discount'])->where('year_id', $year_id)->where('class_id', $class_id)->get();
+		$date = date('Y-m');
+		// $date = date('Y-m', strtotime($request->date));
 
 		$html['thsource']  = '<th>ID No</th>';
 		$html['thsource'] .= '<th>Student Name</th>';
@@ -46,43 +62,68 @@ class StudentFeeController extends Controller
 		$html['thsource'] .= '<th>Fee (This Student)</th>';
 		$html['thsource'] .= '<th>Select</th>';
 
-		foreach ($data as $key => $std) {
-			$registrationfee = FeeCategoryAmount::where('fee_category_id', $fee_category_id)->where('class_id', $std->class_id)->first();
-			$accountstudentfees = AccountStudentFee::where('student_id', $std->student_id)->where('year_id', $std->year_id)->where('class_id', $std->class_id)->where('fee_category_id', $fee_category_id)->where('date', $date)->first();
-
-			if ($accountstudentfees != null) {
-				$checked = 'checked';
-			} else {
-				$checked = '';
+		$validator = $this->ValidateStudentFeeGetStudent($request);
+        if ($validator->fails()) {
+			$error = $validator->errors()->first();
+			$html[1]['tdsource']  = '<td colspan="7">'.$error.'</td>';
+		}
+		
+		$data = AssignStudent::with(['discount'])->where('year_id', $year_id)->where('class_id', $class_id)->get();
+		if ($data) {
+			foreach ($data as $key => $std) {
+				$registrationfee = FeeCategoryAmount::
+					where('fee_category_id', $fee_category_id)
+					->where('class_id', $std->class_id)
+					->first();
+				$accountstudentfees = AccountStudentFee::
+					where('student_id', $std->student_id)
+					->where('year_id', $std->year_id)
+					->where('class_id', $std->class_id)
+					->where('fee_category_id', $fee_category_id)
+					// ->where('date', $date)
+					->first();
+	
+				if ($accountstudentfees != null) {
+					$checked = 'checked';
+				} else {
+					$checked = '';
+				}
+				$color = 'success';
+				$html[$key]['tdsource']  = '<td>' . $std['student']['id_no'] . '<input type="hidden" name="fee_category_id" value= " ' . $fee_category_id . ' " >' . '</td>';
+	
+				$html[$key]['tdsource']  .= '<td>' . $std['student']['name'] . '<input type="hidden" name="year_id" value= " ' . $std->year_id . ' " >' . '</td>';
+	
+				$html[$key]['tdsource']  .= '<td>' . $std['student']['fname'] . '<input type="hidden" name="class_id" value= " ' . $std->class_id . ' " >' . '</td>';
+	
+				$html[$key]['tdsource']  .= '<td>' . $registrationfee->amount . '$' . '<input type="hidden" name="date" value= " ' . $date . ' " >' . '</td>';
+	
+				$html[$key]['tdsource'] .= '<td>' . $std['discount']['discount'] . '%' . '</td>';
+	
+				$orginalfee = $registrationfee->amount;
+				$discount = $std['discount']['discount'];
+				$discountablefee = $discount / 100 * $orginalfee;
+				$finalfee = (int)$orginalfee - (int)$discountablefee;
+	
+				$html[$key]['tdsource'] .= '<td>' . '<input type="text" name="amount[]" value="' . $finalfee . ' " class="form-control" readonly' . '</td>';
+	
+				$html[$key]['tdsource'] .= '<td>' . '<input type="hidden" name="student_id[]" value="' . $std->student_id . '">' . '<input type="checkbox" name="checkmanage[]" id="' . $key . '" value="' . $key . '" ' . $checked . ' style="transform: scale(1.5);margin-left: 10px;"> <label for="' . $key . '"> </label> ' . '</td>';
 			}
-			$color = 'success';
-			$html[$key]['tdsource']  = '<td>' . $std['student']['id_no'] . '<input type="hidden" name="fee_category_id" value= " ' . $fee_category_id . ' " >' . '</td>';
-
-			$html[$key]['tdsource']  .= '<td>' . $std['student']['name'] . '<input type="hidden" name="year_id" value= " ' . $std->year_id . ' " >' . '</td>';
-
-			$html[$key]['tdsource']  .= '<td>' . $std['student']['fname'] . '<input type="hidden" name="class_id" value= " ' . $std->class_id . ' " >' . '</td>';
-
-			$html[$key]['tdsource']  .= '<td>' . $registrationfee->amount . '$' . '<input type="hidden" name="date" value= " ' . $date . ' " >' . '</td>';
-
-			$html[$key]['tdsource'] .= '<td>' . $std['discount']['discount'] . '%' . '</td>';
-
-			$orginalfee = $registrationfee->amount;
-			$discount = $std['discount']['discount'];
-			$discountablefee = $discount / 100 * $orginalfee;
-			$finalfee = (int)$orginalfee - (int)$discountablefee;
-
-			$html[$key]['tdsource'] .= '<td>' . '<input type="text" name="amount[]" value="' . $finalfee . ' " class="form-control" readonly' . '</td>';
-
-			$html[$key]['tdsource'] .= '<td>' . '<input type="hidden" name="student_id[]" value="' . $std->student_id . '">' . '<input type="checkbox" name="checkmanage[]" id="' . $key . '" value="' . $key . '" ' . $checked . ' style="transform: scale(1.5);margin-left: 10px;"> <label for="' . $key . '"> </label> ' . '</td>';
 		}
 		return response()->json(@$html);
 	}
 
 	public function StudentFeeStore(Request $request)
 	{
-		$date = date('Y-m', strtotime($request->date));
-
-		AccountStudentFee::where('year_id', $request->year_id)->where('class_id', $request->class_id)->where('fee_category_id', $request->fee_category_id)->where('date', $request->date)->delete();
+		// dump($request);die();
+		$date = date('Y-m');
+		if ($request->date) {
+			$date = date('Y-m', strtotime($request->date));
+		}
+		AccountStudentFee::where('year_id', $request->year_id)
+			->where('class_id', $request->class_id)
+			->where('fee_category_id', $request->fee_category_id)
+			->where('date', $request->date)
+			->delete();
 
 		$checkdata = $request->checkmanage;
 
