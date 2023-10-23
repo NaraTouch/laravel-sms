@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('academics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('class_id')->unsigned()->nullable(false);
+            $table->integer('class_id')->unsigned()->nullable();
+            $table->integer('year_id')->unsigned()->nullable();
+            $table->integer('group_id')->unsigned()->nullable();
+            $table->integer('shift_id')->unsigned()->nullable();
             $table->string('name', 255)->nullable(false);
             $table->tinyInteger('status')->nullable(false)->default(0);
             $table->date('start_date')->nullable(false);

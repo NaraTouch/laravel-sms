@@ -7,41 +7,21 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="box bb-3 border-warning">
-                            <div class="box-header">
-                                <h4 class="box-title">Student <strong>Search</strong></h4>
-                            </div>
-                            <div class="box-body">
-                                <form method="GET" action="{{ route('student.year.class.wise') }}">
+                            <form method="GET" action="{{ route('student.year.class.wise') }}">
+                                <div class="box-header">
+                                    <h4 class="box-title">Student <strong>Search</strong></h4>
+                                    <div style="float: right;">
+                                        <input type="submit" class="btn btn-rounded btn-dark mb-5" name="search"
+                                            value="Search">
+                                    </div>
+                                </div>
+                                <div class="box-body">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <h5>Year <span class="text-danger"> </span></h5>
+                                                <h5>Student ID <span class="text-danger"> </span></h5>
                                                 <div class="controls">
-                                                    <select name="year_id" class="form-control">
-                                                        <option value="" selected="">Select Year
-                                                        </option>
-                                                        @foreach ($years as $year)
-                                                            <option value="{{ $year->id }}"
-                                                                {{ @$year_id == $year->id ? 'selected' : '' }}>
-                                                                {{ $year->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <h5>Class <span class="text-danger"> </span></h5>
-                                                <div class="controls">
-                                                    <select name="class_id" class="form-control">
-                                                        <option value="" selected="">Select Class
-                                                        </option>
-                                                        @foreach ($classes as $class)
-                                                            <option value="{{ $class->id }}"
-                                                                {{ @$class_id == $class->id ? 'selected' : '' }}>
-                                                                {{ $class->name }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="text" name="student_id_no" class="form-control" value="{{ @$student_id_no }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -53,13 +33,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3" style="padding-top: 25px;">
-                                            <input type="submit" class="btn btn-rounded btn-dark mb-5" name="search"
-                                                value="Search">
-                                        </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-12">
@@ -79,8 +55,6 @@
                                                     <th width="5%">SL</th>
                                                     <th>Name</th>
                                                     <th>ID No</th>
-                                                    <th>Year</th>
-                                                    <th>Class</th>
                                                     <th>Image</th>
                                                     <th width="25%">Action</th>
                                                 </tr>
@@ -91,8 +65,6 @@
                                                         <td>{{ $key + 1 }}</td>
                                                         <td> {{ $value->student_name }}</td>
                                                         <td> {{ $value->student_id_no }}</td>
-                                                        <td> {{ $value->student_year_name }}</td>
-                                                        <td> {{ $value->student_classe_name }}</td>
                                                         <td>
                                                             <img src="{{ isset($value->student_image) ? url('upload/student_images/'.$value->student_image) : url('upload/no_image.jpg') }}"
                                                                 style="width: 60px; width: 60px;">
@@ -126,8 +98,6 @@
                                                     <th width="5%">SL</th>
                                                     <th>Name</th>
                                                     <th>ID No</th>
-                                                    <th>Year</th>
-                                                    <th>Class</th>
                                                     <th>Image</th>
                                                     <th width="25%">Action</th>
                                                 </tr>
@@ -138,8 +108,6 @@
                                                         <td>{{ $key + 1 }}</td>
                                                         <td> {{ $value->student_name }}</td>
                                                         <td> {{ $value->student_id_no }}</td>
-                                                        <td> {{ $value->student_year_name }}</td>
-                                                        <td> {{ $value->student_classe_name }}</td>
                                                         <td>
                                                             <img src="{{ isset($value->student_image) ? url('upload/student_images/'.$value->student_image) : url('upload/no_image.jpg') }}"
                                                                 style="width: 60px; width: 60px;">

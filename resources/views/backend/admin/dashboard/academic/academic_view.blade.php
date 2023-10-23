@@ -40,16 +40,6 @@
                                                     </td>
                                                     <td>
                                                         @if ($value->status)
-                                                        <span class="btn-xs btn-success disabled">Active</span>
-                                                        @else
-                                                            <span class="btn-xs btn-danger disabled">Disactive</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @feature(academic.edit
-                                                        @<a href="{{ route('academic.edit', $value->id) }}"
-                                                            class="btn btn-info">Edit</a>)
-                                                        @if ($value->status)
                                                             @feature(academic.delete
                                                             @<a href="{{ route('academic.delete', ['id' => $value->id, 'status' => 0]) }}"
                                                                 class="btn btn-danger" id="delete">Disactive</a>)
@@ -58,6 +48,12 @@
                                                             @<a href="{{ route('academic.delete', ['id' => $value->id, 'status' => 1]) }}"
                                                                 class="btn btn-success" id="delete">Active</a>)
                                                         @endif
+                                                    </td>
+                                                    <td>
+                                                        @feature(academic.edit
+                                                        @<a href="{{ route('academic.edit', $value->id) }}"
+                                                            class="btn btn-info">Edit</a>)
+                                                       
                                                     </td>
                                                 </tr>
                                             @endforeach

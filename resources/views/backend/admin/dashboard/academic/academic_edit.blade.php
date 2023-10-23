@@ -20,7 +20,23 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <h5>Class <span class="text-danger"> </span></h5>
+                                                <h5>Year <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <select name="year_id" required="" class="form-control">
+                                                        <option value="" selected="" disabled="">
+                                                            Select Year</option>
+                                                        @foreach ($years as $year)
+                                                            <option value="{{ $year->id }}"
+                                                                {{ $editData->year_id == $year->id ? 'selected' : '' }}>
+                                                                {{ $year->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h5>Class <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <select name="class_id" required="" class="form-control">
                                                         <option value="" selected="" disabled="">
@@ -34,6 +50,40 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h5>Group <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <select name="group_id" required="" class="form-control">
+                                                        <option value="" selected="" disabled="">
+                                                            Select Group</option>
+                                                        @foreach ($groups as $group)
+                                                            <option value="{{ $group->id }}"
+                                                                {{ $editData->group_id == $group->id ? 'selected' : '' }}>
+                                                                {{ $group->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h5>Shift <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <select name="shift_id" required="" class="form-control">
+                                                        <option value="" selected="" disabled="">
+                                                            Select Shift</option>
+                                                        @foreach ($shifts as $shift)
+                                                            <option value="{{ $shift->id }}"
+                                                                {{ $editData->shift_id == $shift->id ? 'selected' : '' }}>
+                                                                {{ $shift->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <h5>Academy Name <span class="text-danger">*</span></h5>

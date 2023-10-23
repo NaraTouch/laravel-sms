@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class AssignStudent extends Model
 {
+
+    public function academics()
+    {
+        return $this->belongsTo(Academics::class, 'academy_id', 'id');
+    }
+
     public function student()
     {
         return $this->belongsTo(User::class, 'student_id', 'id');
@@ -17,24 +23,20 @@ class AssignStudent extends Model
         return $this->belongsTo(DiscountStudent::class, 'id', 'assign_student_id');
     }
 
-
     public function student_class()
     {
         return $this->belongsTo(StudentClass::class, 'class_id', 'id');
     }
-
 
     public function student_year()
     {
         return $this->belongsTo(StudentYear::class, 'year_id', 'id');
     }
 
-
     public function group()
     {
         return $this->belongsTo(StudentGroup::class, 'group_id', 'id');
     }
-
 
     public function shift()
     {

@@ -117,37 +117,22 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <h5>Year <span class="text-danger">*</span></h5>
+                                                        <h5>Academy <span class="text-danger">*</span></h5>
                                                         <div class="controls">
-                                                            <select name="year_id" required="" class="form-control">
+                                                            <select name="academy_id" required="" class="form-control">
                                                                 <option value="" selected="" disabled="">
-                                                                    Select Year</option>
-                                                                @foreach ($years as $year)
-                                                                    <option value="{{ $year->id }}">{{ $year->name }}
+                                                                    Select Academy</option>
+                                                                @foreach ($academics as $academy)
+                                                                    <option value="{{ $academy->id }}">{{ $academy->name }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <h5>Class <span class="text-danger">*</span></h5>
-                                                        <div class="controls">
-                                                            <select name="class_id" required="" class="form-control">
-                                                                <option value="" selected="" disabled="">
-                                                                    Select Class</option>
-                                                                @foreach ($classes as $class)
-                                                                    <option value="{{ $class->id }}">{{ $class->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <h5>Email Address <span class="text-danger">*</span></h5>
                                                         <div class="controls">
@@ -156,38 +141,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <h5>Group <span class="text-danger">*</span></h5>
-                                                        <div class="controls">
-                                                            <select name="group_id" required="" class="form-control">
-                                                                <option value="" selected="" disabled="">
-                                                                    Select Group</option>
-                                                                @foreach ($groups as $group)
-                                                                    <option value="{{ $group->id }}">{{ $group->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <h5>Shift <span class="text-danger">*</span></h5>
-                                                        <div class="controls">
-                                                            <select name="shift_id" required="" class="form-control">
-                                                                <option value="" selected="" disabled="">
-                                                                    Select Shift</option>
-                                                                @foreach ($shifts as $shift)
-                                                                    <option value="{{ $shift->id }}">{{ $shift->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <h5>Profile Image <span class="text-danger">*</span></h5>
