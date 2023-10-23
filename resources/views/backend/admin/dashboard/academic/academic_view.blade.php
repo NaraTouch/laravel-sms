@@ -9,10 +9,10 @@
 
                         <div class="box">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Student Class List</h3>
-                                @feature(student.class.add
-                                @<a href="{{ route('student.class.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-success mb-5"> Add Student Class</a>)
+                                <h3 class="box-title">Academy List</h3>
+                                @feature(academic.add
+                                @<a href="{{ route('academic.add') }}" style="float: right;"
+                                    class="btn btn-rounded btn-success mb-5"> Create Academy Class</a>)
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -20,23 +20,44 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">SL</th>
-                                                <th>Name</th>
+                                                <th>Academy Name</th>
+                                                <th>Class Type</th>
+                                                <th>Start/End</th>
+                                                <th>Status</th>
                                                 <th width="25%">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($allData as $key => $student)
+                                            @foreach ($allData as $key => $value)
                                                 <tr>
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td> {{ $student->name }}</td>
+                                                    <td> {{ $key + 1 }} </td>
+                                                    <td> {{ $value->name }} </td>
+                                                    <td> {{ $value->student_class_name }} </td>
                                                     <td>
-                                                        @feature(student.class.edit
-                                                        @<a href="{{ route('student.class.edit', $student->id) }}"
+                                                        {{ $value->start_date }}
+                                                        <br>
+                                                        {{ $value->end_date }}
+                                                    </td>
+                                                    <td>
+                                                        @if ($value->status)
+                                                        <span class="btn-xs btn-success disabled">Active</span>
+                                                        @else
+                                                            <span class="btn-xs btn-danger disabled">Disactive</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @feature(academic.edit
+                                                        @<a href="{{ route('academic.edit', $value->id) }}"
                                                             class="btn btn-info">Edit</a>)
-
-                                                        @feature(student.class.delete
-                                                        @<a href="{{ route('student.class.delete', $student->id) }}"
-                                                            class="btn btn-danger" id="delete">Delete</a>)
+                                                        @if ($value->status)
+                                                            @feature(academic.delete
+                                                            @<a href="{{ route('academic.delete', ['id' => $value->id, 'status' => 0]) }}"
+                                                                class="btn btn-danger" id="delete">Disactive</a>)
+                                                        @else
+                                                            @feature(academic.delete
+                                                            @<a href="{{ route('academic.delete', ['id' => $value->id, 'status' => 1]) }}"
+                                                                class="btn btn-success" id="delete">Active</a>)
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

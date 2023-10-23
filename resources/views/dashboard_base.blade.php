@@ -43,22 +43,26 @@
                 $(document).on('click', '#delete', function(e) {
                     e.preventDefault();
                     var link = $(this).attr("href");
+                    var text = $(this).text();
                     Swal.fire({
                         title: 'Are you sure?',
-                        text: "Delete This Data?",
+                        text: text+" This Data?",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
+                        confirmButtonText: 'Yes, '+text+' it!',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
                     }).then((result) => {
                         if (result.isConfirmed) {
                             window.location.href = link
-                            Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
-                            )
+                            Swal.fire({
+                                title: text+'!',
+                                text: 'Your file has been '+text+'.',
+                                icon: 'success',
+                                showConfirmButton: false // This line disables the OK button
+                            })
                         }
                     })
                 });

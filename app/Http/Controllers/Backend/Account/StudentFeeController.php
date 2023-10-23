@@ -114,7 +114,6 @@ class StudentFeeController extends Controller
 
 	public function StudentFeeStore(Request $request)
 	{
-		// dump($request);die();
 		$date = date('Y-m');
 		if ($request->date) {
 			$date = date('Y-m', strtotime($request->date));

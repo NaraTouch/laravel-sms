@@ -236,7 +236,7 @@ Route::prefix('admin')->group(function () {
         Route::post('academic/store', [AcademicController::class, 'AcademicStore'])->name('store.academic');
         Route::get('academic/edit/{id}', [AcademicController::class, 'AcademicEdit'])->name('academic.edit');
         Route::post('academic/update/{id}', [AcademicController::class, 'AcademicUpdate'])->name('update.academic');
-        Route::get('academic/delete/{id}', [AcademicController::class, 'AcademicDelete'])->name('academic.delete');
+        Route::get('academic/delete/{id}/{status}', [AcademicController::class, 'AcademicDelete'])->name('academic.delete');
     });
 
     Route::middleware(['admin'])->prefix('students')->group(function () {
